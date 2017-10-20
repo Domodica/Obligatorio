@@ -9,6 +9,6 @@ package modelo;
  *
  * @author simonlg
  */
-class Servicio {
+public class Servicio {
     
 }

@@ -5,18 +5,16 @@
  */
 package controlador;
 
-import modelo.Usuario;
+import modelo.Mozo;
 
 /**
  *
  * @author alumnoFI
  */
-public interface VistaLogin {
+public interface VistaLoginMozo {
 
     public void error(String mensaje);
 
-    public void ingresarMozo(Usuario usr);
-    
-    public void ingresarGestor(Usuario usr);
+    public void ingresar(Mozo mozo);
     
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author simonlg
  */
-public class SistemaGestor {
+public class SistemaProcesadorPedidos {
     
     private ArrayList<Gestor> gestores = new ArrayList();
     

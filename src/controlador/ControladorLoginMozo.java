@@ -11,10 +11,10 @@ import modelo.Mozo;
 
 public class ControladorLoginMozo {
     
-    private VistaLogin vista;
+    private VistaLoginMozo vista;
     private Sistema fachada = Sistema.getInstancia();
 
-    public ControladorLoginMozo(VistaLogin vista) {
+    public ControladorLoginMozo(VistaLoginMozo vista) {
         this.vista = vista;
     }
             

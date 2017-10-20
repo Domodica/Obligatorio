@@ -5,38 +5,30 @@
  */
 package vista;
 
-
-
-import controlador.ControladorLoginGestor;
 import controlador.ControladorLoginMozo;
-import controlador.VistaLogin;
 import java.awt.Container;
 import java.awt.GridLayout;
 import javax.swing.JOptionPane;
-import modelo.Usuario;
+import controlador.VistaLoginMozo;
+import modelo.Mozo;
 
 /**
  *
  * @author simonlg
  */
-public class LoginDialog extends javax.swing.JDialog implements VistaLogin{
+public class LoginDialogMozo extends javax.swing.JDialog implements VistaLoginMozo {
 
     /**
-     * Creates new form LoginDialog
+     * Creates new form LoginDialogMozo
      */
     private ControladorLoginMozo controlador;
-    private ControladorLoginGestor controladorGestor;
-    private Container padre = this.getParent();
-    
-    public LoginDialog(java.awt.Frame parent, boolean modal, boolean mozo) {
+    private Container padre;
+
+    public LoginDialogMozo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null); 
-        if(mozo){
-             controlador = new ControladorLoginMozo(this);
-        }else{
-            controladorGestor = new ControladorLoginGestor(this);
-        }
+        setLocationRelativeTo(null);
+        controlador = new ControladorLoginMozo(this);
         padre = parent;
     }
 
@@ -60,11 +52,17 @@ public class LoginDialog extends javax.swing.JDialog implements VistaLogin{
 
         jLabel1.setText("Usuario");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 30, 100, 20);
+        jLabel1.setBounds(30, 30, 60, 20);
 
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 80, 60, 20);
+
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
         getContentPane().add(nombre);
         nombre.setBounds(90, 30, 150, 30);
 
@@ -98,7 +96,10 @@ public class LoginDialog extends javax.swing.JDialog implements VistaLogin{
         login();
     }//GEN-LAST:event_passwordActionPerformed
 
-   
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -109,23 +110,26 @@ public class LoginDialog extends javax.swing.JDialog implements VistaLogin{
     // End of variables declaration//GEN-END:variables
 
     private void login() {
-        controlador.login(nombre.getText(),password.getText());
+        controlador.login(nombre.getText(), password.getText());
     }
+
     @Override
     public void error(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
+
     @Override
-    public void ingresarMozo(Usuario usr) {
+    public void ingresar(Mozo mozo) {
         dispose();
-        usr.setLogueado(true);
-        padre.setLayout(new GridLayout(2,1));
+        mozo.setLogueado(true);
+        padre.setLayout(new GridLayout(2, 1));
         PanelMesas pm = new PanelMesas();
         PanelEstatico pe = new PanelEstatico(pm);
         PanelDinamico pd = new PanelDinamico();
         add(pe);
         add(pm);
-        System.out.println("ingreso " + usr.getNombre());
-        //new MozoFrame(usr).setVisible(true);
+        System.out.println("ingreso " + mozo.getNombre());
+
     }
+
 }

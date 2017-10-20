@@ -11,8 +11,8 @@ package modelo;
  */
 public class Sistema {
 
-    private SistemaMozo sm = new SistemaMozo(); //NO GETS
-    private SistemaGestor sg = new SistemaGestor();
+    private SistemaAtencionCliente sm = new SistemaAtencionCliente(); //NO GETS
+    private SistemaProcesadorPedidos sg = new SistemaProcesadorPedidos();
 
     private static Sistema instancia = new Sistema();
 

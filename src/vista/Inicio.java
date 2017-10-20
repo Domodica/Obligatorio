@@ -5,6 +5,7 @@
  */
 package vista;
 
+import modelo.Gestor;
 import modelo.Mozo;
 import modelo.Sistema;
 
@@ -23,19 +24,16 @@ public class Inicio {
         v.setVisible(true);
         cargarDatos();
     }
-    
+
     private static void cargarDatos() {
-        
+
         Sistema logica = Sistema.getInstancia();
-        
-        logica.agregar(new Mozo("Gabriel Rodriguez","Gabriel","moon",false));
-        logica.agregar(new Mozo("Juan Perez","Juan","moon",false));
-        logica.agregar(new Mozo("Ana Lopez","Ana","moon",false));
-        
-        
-        
-        
-        
+
+        logica.agregar(new Mozo("Gabriel Rodriguez", "Gabriel", "moon", false));
+        logica.agregar(new Mozo("Juan Perez", "Juan", "moon", false));
+        logica.agregar(new Mozo("Ana Lopez", "Ana", "moon", false));
+        logica.agregar(new Gestor("Pepe", "Pepe", "moon", false));
+
     }
-    
+
 }

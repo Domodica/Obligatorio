@@ -6,13 +6,12 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  *
  * @author simonlg
  */
-public class SistemaMozo {
+public class SistemaAtencionCliente {
 
  private ArrayList<Mozo> mozos = new ArrayList();
 

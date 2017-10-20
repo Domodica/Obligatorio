@@ -84,14 +84,14 @@ public class VentantaPrincipalJFrame extends javax.swing.JFrame implements Vista
 
     @Override
     public void iniciarInterfaceMozo() {
-        JDialog l = new LoginDialog(this, rootPaneCheckingEnabled, true);
+        JDialog l = new LoginDialogMozo(this, rootPaneCheckingEnabled);
         l.setVisible(true);
       
     }
 
     @Override
     public void iniciarInterfaceGestor() {
-        JDialog l = new LoginDialog(this, rootPaneCheckingEnabled, false);
+        JDialog l = new LoginDialogGestor(this, rootPaneCheckingEnabled);
         l.setVisible(true);
     }
 }

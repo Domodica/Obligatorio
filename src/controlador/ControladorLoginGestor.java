@@ -14,10 +14,10 @@ import modelo.Sistema;
  */
 public class ControladorLoginGestor {
 
-    private VistaLogin vista;
+    private VistaLoginGestor vista;
     private Sistema fachada = Sistema.getInstancia();
 
-    public ControladorLoginGestor(VistaLogin vista) {
+    public ControladorLoginGestor(VistaLoginGestor vista) {
         this.vista = vista;
     }
 

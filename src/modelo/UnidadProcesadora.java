@@ -5,10 +5,16 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author simonlg
  */
 public class UnidadProcesadora {
+    
+    private String nombre;
+    private ArrayList<Pedido> pendientes;
+    
     
 }

@@ -9,6 +9,6 @@ package modelo;
  *
  * @author simonlg
  */
-public class Transferencia {
+public class Pedido {
     
 }
