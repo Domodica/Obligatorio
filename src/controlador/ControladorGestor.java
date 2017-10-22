@@ -5,15 +5,18 @@
  */
 package controlador;
 
+import modelo.UnidadProcesadora;
+
 /**
  *
  * @author simonlg
  */
-public interface VistaGestor {
+public class ControladorGestor {
     
-    public void mostrarUnidadesProcesadoras();
+    private UnidadProcesadora puesto;
+    private VistaGestor vista;
     
-    public void ingresarPuesto();
+    
     
     
 }

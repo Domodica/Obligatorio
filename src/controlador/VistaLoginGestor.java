@@ -17,4 +17,6 @@ public interface VistaLoginGestor {
 
     public void ingresar(Gestor gestor);
     
+    public void seleccionarUP ();
+    
 }

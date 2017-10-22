@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package vistaGestor;
 
 import controlador.ControladorLoginGestor;
 import controlador.VistaLoginGestor;
 import java.awt.Container;
 import java.awt.GridLayout;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import modelo.Gestor;
 
@@ -89,7 +90,7 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -99,7 +100,7 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
                     .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,8 +135,11 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
     public void ingresar(Gestor gestor) {
         dispose();
         gestor.setLogueado(true);
-
         System.out.println("ingreso " + gestor.getNombre());
+        padre.removeAll();
+        padre.setLayout(null);
+        padre.add();
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -145,4 +149,9 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField password;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void seleccionarUP() {
+        
+    }
 }

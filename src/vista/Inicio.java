@@ -5,9 +5,11 @@
  */
 package vista;
 
+import vista.VentantaPrincipalJFrame;
 import modelo.Gestor;
 import modelo.Mozo;
 import modelo.Sistema;
+import modelo.UnidadProcesadora;
 
 /**
  *
@@ -33,6 +35,9 @@ public class Inicio {
         logica.agregar(new Mozo("Juan Perez", "Juan", "moon", false));
         logica.agregar(new Mozo("Ana Lopez", "Ana", "moon", false));
         logica.agregar(new Gestor("Pepe", "Pepe", "moon", false));
+        logica.agregar(new UnidadProcesadora("Parrilla"));
+        logica.agregar(new UnidadProcesadora("Bar"));
+        logica.agregar(new UnidadProcesadora("Sushi"));
 
     }
 

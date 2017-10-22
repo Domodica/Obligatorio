@@ -5,9 +5,11 @@
  */
 package vista;
 
+import vistaGestor.LoginDialogGestor;
 import controlador.VistaVentanaPpal;
 import controlador.ControladorVentanaPrincipal;
 import javax.swing.JDialog;
+import vistaMozo.LoginDialogMozo;
 
 /**
  *

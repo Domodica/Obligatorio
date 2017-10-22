@@ -13,16 +13,18 @@ import java.util.ArrayList;
  */
 public class SistemaAtencionCliente {
 
- private ArrayList<Mozo> mozos = new ArrayList();
+    private ArrayList<Mozo> mozos = new ArrayList();
 
-    
-    public void agregar(Mozo m){
+    public void agregar(Mozo m) {
         mozos.add(m);
     }
-    public Mozo login(String n,String p){
-        for(Mozo m:mozos)
-            if(m.getNombre().equals(n) && m.getPassword().equals(p))
+
+    public Mozo login(String n, String p) {
+        for (Mozo m : mozos) {
+            if (m.getNombre().equals(n) && m.getPassword().equals(p)) {
                 return m;
+            }
+        }
         return null;
     }
 }

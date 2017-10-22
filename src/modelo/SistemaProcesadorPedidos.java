@@ -14,15 +14,28 @@ import java.util.ArrayList;
 public class SistemaProcesadorPedidos {
     
     private ArrayList<Gestor> gestores = new ArrayList();
+    private ArrayList<UnidadProcesadora> unidadesProcesadoras = new ArrayList<>();
     
-     public void agregar(Gestor g){
+    public void agregar(Gestor g) {
         gestores.add(g);
     }
-    public Gestor login(String n,String p){
-        for(Gestor g:gestores)
-            if(g.getNombre().equals(n) && g.getPassword().equals(p))
+    
+    public void agregar(UnidadProcesadora uni) {
+        unidadesProcesadoras.add(uni);
+    }    
+    
+    public Gestor login(String n, String p) {
+        for (Gestor g : gestores) {
+            if (g.getNombre().equals(n) && g.getPassword().equals(p)) {
+                g.setLogueado(true);
                 return g;
+            }
+        }
         return null;
+    }
+    
+    public void asignarUPaGestor(Gestor g, UnidadProcesadora up){
+        g.setUp(up);
     }
     
 }

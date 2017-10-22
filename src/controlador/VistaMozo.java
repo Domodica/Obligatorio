@@ -13,9 +13,9 @@ import modelo.Mesa;
  * @author simonlg
  */
 public interface VistaMozo {
-    
-     public void mostrarNumeroMesaSeleccionada(int numero);
+
+    public void mostrarNumeroMesaSeleccionada(int numero);
 
     public void mostrarMesas(ArrayList<Mesa> mesas);
-    
+
 }

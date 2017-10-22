@@ -15,6 +15,13 @@ public class Gestor extends Usuario {
 
     private UnidadProcesadora up;
 
+    public UnidadProcesadora getUp() {
+        return up;
+    }
+    public void setUp(UnidadProcesadora up) {
+        this.up = up;
+    }
+
     public Gestor(String nombreCompleto, String nombre, String password, Boolean logueado) {
         super(nombreCompleto, nombre, password, logueado);
 
