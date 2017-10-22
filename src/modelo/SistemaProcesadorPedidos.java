@@ -14,6 +14,22 @@ import java.util.ArrayList;
 public class SistemaProcesadorPedidos {
     
     private ArrayList<Gestor> gestores = new ArrayList();
+
+    public ArrayList<Gestor> getGestores() {
+        return gestores;
+    }
+
+    public void setGestores(ArrayList<Gestor> gestores) {
+        this.gestores = gestores;
+    }
+
+    public ArrayList<UnidadProcesadora> getUnidadesProcesadoras() {
+        return unidadesProcesadoras;
+    }
+
+    public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> unidadesProcesadoras) {
+        this.unidadesProcesadoras = unidadesProcesadoras;
+    }
     private ArrayList<UnidadProcesadora> unidadesProcesadoras = new ArrayList<>();
     
     public void agregar(Gestor g) {

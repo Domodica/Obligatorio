@@ -19,8 +19,10 @@ public class BotonMesa extends JButton{
     public BotonMesa(Mesa mesa) {
         super(mesa.getNumero()+"");
         this.mesa = mesa;
-        if(mesa.getLibre()) setBackground(Color.green);
-        else setBackground(Color.red);
+        if(mesa.getAbierta())
+            setBackground(Color.green);
+        else
+            setBackground(Color.red);
     }
 
     public Mesa getMesa() {

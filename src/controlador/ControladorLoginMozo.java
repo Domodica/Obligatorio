@@ -22,7 +22,7 @@ public class ControladorLoginMozo {
         Mozo mozo = fachada.loginMozo(u, p);
         if(mozo == null){
             vista.error("Login incorrecto");
-        }else{
+        }else{  
             vista.ingresar(mozo);
         }
     }

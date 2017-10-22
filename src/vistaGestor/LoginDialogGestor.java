@@ -138,7 +138,7 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
         System.out.println("ingreso " + gestor.getNombre());
         padre.removeAll();
         padre.setLayout(null);
-        padre.add();
+     
         
     }
 

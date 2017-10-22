@@ -24,7 +24,7 @@ public class PanelInicioGestor extends javax.swing.JPanel implements ActionListe
     
     public PanelInicioGestor() {
         initComponents();
-        cBoxUniProcesadoras.
+        
     }
 
     /**

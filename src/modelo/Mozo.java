@@ -16,6 +16,9 @@ public class Mozo extends Usuario{
     private ArrayList<Mesa> listaMesas;
     private Transferencia transferencia;
 
+    
+    public enum eventos{refreshMesas;} ///////////////////////////
+
  
     public ArrayList<Mesa> getListaMesas() {
         return listaMesas;
@@ -38,6 +41,9 @@ public class Mozo extends Usuario{
 
         this.listaMesas = new ArrayList<>();
     }
-    
+     
+     public void agregarMesa(Mesa m){ /////////////////////////////////
+         this.listaMesas.add(m);
+     }
     
 }

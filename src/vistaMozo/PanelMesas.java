@@ -24,17 +24,19 @@ public class PanelMesas extends JPanel{
     public void setEscuchador(ActionListener al) {
         this.al = al;
     }
-     public void mostrar(ArrayList<Mesa> lista,int cols){
+    
+     public void mostrar(ArrayList<Mesa> mesas,int cols){
         removeAll();
-        if(lista.size()<cols) cols = lista.size();
+        if(mesas.size()<cols) cols = mesas.size();
+        
         setLayout(new GridLayout(0,cols));
-        for(Mesa m:lista){
+        
+        for(Mesa m:mesas){
             BotonMesa b = new BotonMesa(m);
             b.addActionListener(al);
             add(b);
         }
-        validate();
-        
+        validate();       
     }
     
     

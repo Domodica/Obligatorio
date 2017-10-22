@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import modelo.Mesa;
+import modelo.Mozo;
 
 /**
  *
@@ -23,11 +24,14 @@ public class PanelEstatico extends javax.swing.JPanel implements ActionListener,
      */
     private PanelMesas panelMesas;
     private ControladorMozo controlador;
-    public PanelEstatico(PanelMesas pm) {
+    
+    public PanelEstatico(PanelMesas pm, Mozo mozo) {
         initComponents();
         panelMesas = pm;
+        
         pm.setEscuchador(this);
-        controlador = new ControladorMozo(this);
+        
+        controlador = new ControladorMozo(this, mozo);
     }
 
     /**
@@ -41,21 +45,46 @@ public class PanelEstatico extends javax.swing.JPanel implements ActionListener,
 
         mesaSel = new javax.swing.JLabel();
         abrirMesa = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnSalirSistema = new javax.swing.JButton();
+        verServicio = new javax.swing.JButton();
 
         setLayout(null);
 
-        mesaSel.setText("SELECCIONADA:");
+        mesaSel.setText("Mesa seleccionada:");
         add(mesaSel);
-        mesaSel.setBounds(180, 40, 120, 20);
+        mesaSel.setBounds(20, 70, 170, 40);
 
-        abrirMesa.setText("ABRIR");
+        abrirMesa.setText("ABRIR MESA");
         abrirMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirMesaActionPerformed(evt);
             }
         });
         add(abrirMesa);
-        abrirMesa.setBounds(50, 90, 110, 70);
+        abrirMesa.setBounds(210, 70, 110, 40);
+
+        jLabel1.setText("Verde: mesas libres");
+        add(jLabel1);
+        jLabel1.setBounds(20, 10, 150, 20);
+
+        jLabel2.setText("Rojo: mesas ocupadas");
+        add(jLabel2);
+        jLabel2.setBounds(20, 30, 130, 20);
+
+        btnSalirSistema.setText("SALIR del sistema");
+        add(btnSalirSistema);
+        btnSalirSistema.setBounds(380, 130, 180, 40);
+
+        verServicio.setText("VER SERVICIO");
+        verServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verServicioActionPerformed(evt);
+            }
+        });
+        add(verServicio);
+        verServicio.setBounds(350, 70, 120, 40);
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirMesaActionPerformed
@@ -63,10 +92,18 @@ public class PanelEstatico extends javax.swing.JPanel implements ActionListener,
         controlador.abrir();
     }//GEN-LAST:event_abrirMesaActionPerformed
 
+    private void verServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verServicioActionPerformed
+        controlador.verServicio();
+    }//GEN-LAST:event_verServicioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirMesa;
+    private javax.swing.JButton btnSalirSistema;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel mesaSel;
+    private javax.swing.JButton verServicio;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -78,11 +115,11 @@ public class PanelEstatico extends javax.swing.JPanel implements ActionListener,
 
     @Override
     public void mostrarNumeroMesaSeleccionada(int numero) {
-        mesaSel.setText("SELECCIONADA: " + numero);
+        mesaSel.setText("Mesa seleccionada: " + numero);
     }
 
     @Override
     public void mostrarMesas(ArrayList<Mesa> mesas) {
-        panelMesas.mostrar(mesas, 5);
+        panelMesas.mostrar(mesas, 4);
     }
 }

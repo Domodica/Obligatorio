@@ -30,14 +30,32 @@ public class Inicio {
     private static void cargarDatos() {
 
         Sistema logica = Sistema.getInstancia();
-
-        logica.agregar(new Mozo("Gabriel Rodriguez", "Gabriel", "moon", false));
+                logica.agregar(new Mozo("m m", "m", "m", false));
         logica.agregar(new Mozo("Juan Perez", "Juan", "moon", false));
         logica.agregar(new Mozo("Ana Lopez", "Ana", "moon", false));
         logica.agregar(new Gestor("Pepe", "Pepe", "moon", false));
         logica.agregar(new UnidadProcesadora("Parrilla"));
         logica.agregar(new UnidadProcesadora("Bar"));
         logica.agregar(new UnidadProcesadora("Sushi"));
+        logica.agregar(new UnidadProcesadora("Cocina"));
+
+        //Mesas al mozo Gabriel ///////////////////// NOMBRE MOZO TIENE QUE SER UNICO PARA HACERLO ASI
+        logica.agregarMesa("m", false, 1);
+        logica.agregarMesa("m", false, 3);
+        logica.agregarMesa("m", false, 5);
+        logica.agregarMesa("m", false, 7);
+        logica.agregarMesa("m", false, 9);
+        logica.agregarMesa("m", false, 10);
+
+        //Mesas al mozo Juan ///////////////////// NOMBRE MOZO TIENE QUE SER UNICO PARA HACERLO ASI
+        logica.agregarMesa("Juan", false, 2);
+        logica.agregarMesa("Juan", false, 4);
+        logica.agregarMesa("Juan", false, 6);
+
+        logica.agregarArt(1, "Chivito", 150.0, 100);
+        logica.agregarArt(2, "panchos", 100.0, 80);
+        logica.agregarArt(3, "fritas", 80.0, 150);
+        logica.agregarArt(4, "pollo", 150.0, 2);
 
     }
 

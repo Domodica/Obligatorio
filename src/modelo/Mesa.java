@@ -5,22 +5,20 @@
  */
 package modelo;
 
-/**
- *
- * @author simonlg
- */
+
+
 public class Mesa {
     
-    Boolean libre;
-    Integer numero;
-    Servicio servicio;
+    private Boolean abierta;
+    private Integer numero;
+    private Servicio servicio;
     
-    public Boolean getLibre() {
-        return libre;
+    public Boolean getAbierta() {
+        return abierta;
     }
 
-    public void setLibre(Boolean libre) {
-        this.libre = libre;
+    public void setAbierta(Boolean abierta) {
+        this.abierta = abierta;
     }
 
     public Integer getNumero() {
@@ -40,14 +38,11 @@ public class Mesa {
     }
 
     public Mesa(Boolean libre, Integer numero) {
-        this.libre = libre;
+        this.abierta = libre;
         this.numero = numero;
     }
     
- public void setAbierta(boolean abierta) {
-        this.libre = abierta;
-    }
- 
-    
-    
+
+
 }
+

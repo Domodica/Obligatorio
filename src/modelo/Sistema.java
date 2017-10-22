@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author simonlg
@@ -45,6 +47,30 @@ public class Sistema {
 
     public void asignarUPaGestor(Gestor g, UnidadProcesadora up) {
         spp.asignarUPaGestor(g, up);
+    }
+       
+    public void agregarMesa(String nombreMozo, Boolean libre, Integer numero){ ///////////////////////////
+        sa.agregarMesa(nombreMozo, libre, numero);
+    }
+
+    public void agregarArt(Integer codigo, String nombre, Double precio, Integer stock) {
+        sa.agregarArt(codigo, nombre, precio, stock);
+    }
+
+    public ArrayList<Mozo> getMozos() {
+        return sa.getMozos();
+    }
+
+    public ArrayList<Articulo> getArticulos() {
+        return sa.getArticulos();
+    }
+
+    public ArrayList<Gestor> getGestores() {
+        return spp.getGestores();
+    }
+
+    public ArrayList<UnidadProcesadora> getUnidadesProcesadoras() {
+        return spp.getUnidadesProcesadoras();
     }
     
   
