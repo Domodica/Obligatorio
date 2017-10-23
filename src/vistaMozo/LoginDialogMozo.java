@@ -5,11 +5,11 @@
  */
 package vistaMozo;
 
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import controlador.ControladorLoginMozo;
-import java.awt.Container;
-import java.awt.GridLayout;
 import javax.swing.JOptionPane;
 import controlador.VistaLoginMozo;
+import javax.swing.JFrame;
 import modelo.Mozo;
 
 /**
@@ -22,14 +22,12 @@ public class LoginDialogMozo extends javax.swing.JDialog implements VistaLoginMo
      * Creates new form LoginDialogMozo
      */
     private ControladorLoginMozo controlador;
-    private Container padre;
 
-    public LoginDialogMozo(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public LoginDialogMozo() {
         initComponents();
+        setVisible(true);
         setLocationRelativeTo(null);
         controlador = new ControladorLoginMozo(this);
-        padre = parent;
     }
 
     /**
@@ -119,10 +117,15 @@ public class LoginDialogMozo extends javax.swing.JDialog implements VistaLoginMo
     }
 
     @Override
-    public void ingresar(Mozo mozo) { /////////////////////////////////////
+    public void ingresar(Mozo mozo) {
         dispose();
-        System.out.println("ingreso " + mozo.getNombre());
-        new PanelPrincipalMesas(mozo).setVisible(true);
+        JFrame f = new JFrame();
+        f.setSize(800, 800);
+        PanelMesas pm = new PanelMesas();
+        InfoMesaPanel pi = new InfoMesaPanel();
+        PanelPalMozoEstatico pe = new PanelPalMozoEstatico(pm, mozo, pi);
+        PanelContainerMozo pp = new PanelContainerMozo(pe, pm, pi);
+        f.setContentPane(pp);
+        f.setVisible(true);
     }
-
 }

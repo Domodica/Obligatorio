@@ -5,32 +5,30 @@
  */
 package vistaMozo;
 
-import controlador.VistaServicioMesa;
-import modelo.Mesa;
+import controlador.ControladorLoginMozo;
+import java.awt.event.ActionListener;
+import javax.swing.JPanel;
 
 /**
  *
- * @author Dominique
+ * @author simonlg
  */
-public class ServicioMesa extends javax.swing.JFrame implements VistaServicioMesa{
+public class InfoMesaPanel extends JPanel{
 
-    private Mesa mesa;
-    /**
-     * Creates new form ServicioMesa
-     */
-    public ServicioMesa(Mesa me) {
-        initComponents();       
-        setLocationRelativeTo(null);
-        setVisible(true);
-        
-        
-        //////////////// Mandar a la tabla la lista de los items consumidos por la mesa
-        
-        
-        
+    private ActionListener al;
+    private ControladorLoginMozo controlador;
+    
+    public void setEscuchador(ActionListener al) {
+        this.al = al;
+        btnAgregarArt.addActionListener(al);
+        btnCerrarMesa.addActionListener(al);
+        btnTransferirMesa.addActionListener(al);
     }
 
-  
+    public InfoMesaPanel() {
+        initComponents();
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,23 +39,25 @@ public class ServicioMesa extends javax.swing.JFrame implements VistaServicioMes
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableItemsConsumidos = new javax.swing.JTable();
         btnTransferirMesa = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnAgregarArt = new javax.swing.JButton();
         btnCerrarMesa = new javax.swing.JButton();
+        lblTotalServicio = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
-
-        jLabel1.setText("Items consumidos:");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 10, 160, 50);
+        setLayout(null);
 
         tableItemsConsumidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -77,53 +77,66 @@ public class ServicioMesa extends javax.swing.JFrame implements VistaServicioMes
         });
         jScrollPane1.setViewportView(tableItemsConsumidos);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 50, 560, 260);
+        add(jScrollPane1);
+        jScrollPane1.setBounds(10, 10, 560, 150);
 
-        btnTransferirMesa.setText("TRANSFERIR Mesa");
-        getContentPane().add(btnTransferirMesa);
-        btnTransferirMesa.setBounds(90, 390, 180, 50);
+        btnTransferirMesa.setText("TRANSFERIR MESA");
+        btnTransferirMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransferirMesaActionPerformed(evt);
+            }
+        });
+        add(btnTransferirMesa);
+        btnTransferirMesa.setBounds(70, 240, 180, 50);
 
         jLabel2.setText("Total:");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(390, 334, 160, 40);
+        add(jLabel2);
+        jLabel2.setBounds(380, 180, 40, 40);
 
-        btnAgregarArt.setText("Agregar artículo");
+        btnAgregarArt.setText("AGREGAR ITEM");
         btnAgregarArt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarArtActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregarArt);
-        btnAgregarArt.setBounds(10, 320, 160, 40);
+        add(btnAgregarArt);
+        btnAgregarArt.setBounds(130, 180, 160, 40);
 
-        btnCerrarMesa.setText("CERRAR Mesa");
-        getContentPane().add(btnCerrarMesa);
-        btnCerrarMesa.setBounds(290, 390, 190, 50);
-
-        setBounds(0, 0, 596, 500);
+        btnCerrarMesa.setText("CERRAR MESA");
+        btnCerrarMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarMesaActionPerformed(evt);
+            }
+        });
+        add(btnCerrarMesa);
+        btnCerrarMesa.setBounds(340, 240, 190, 50);
+        add(lblTotalServicio);
+        lblTotalServicio.setBounds(440, 180, 80, 40);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarArtActionPerformed
+    private void btnTransferirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirMesaActionPerformed
         // TODO add your handling code here:
-        agregarItem();
+    }//GEN-LAST:event_btnTransferirMesaActionPerformed
+
+    private void btnCerrarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarMesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCerrarMesaActionPerformed
+
+    private void btnAgregarArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarArtActionPerformed
+
     }//GEN-LAST:event_btnAgregarArtActionPerformed
 
-   
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarArt;
     private javax.swing.JButton btnCerrarMesa;
     private javax.swing.JButton btnTransferirMesa;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTotalServicio;
     private javax.swing.JTable tableItemsConsumidos;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void agregarItem() {
-        new AgregarItemJDialog(this, rootPaneCheckingEnabled).setVisible(true);
-    }
+
+
 }

@@ -5,28 +5,24 @@
  */
 package vista;
 
-import vistaGestor.LoginDialogGestor;
 import controlador.VistaVentanaPpal;
-import controlador.ControladorVentanaPrincipal;
 import javax.swing.JDialog;
+import vistaGestor.LoginDialogGestor;
 import vistaMozo.LoginDialogMozo;
 
 /**
  *
  * @author simonlg
  */
-public class VentantaPrincipalJFrame extends javax.swing.JFrame implements VistaVentanaPpal {
+public class InicioAppJDialog extends javax.swing.JDialog implements VistaVentanaPpal {
 
     /**
-     * Creates new form VentantaPrincipalJFrame
+     * Creates new form InicioAppJDialog
      */
-    private ControladorVentanaPrincipal controlador;
-    
-    public VentantaPrincipalJFrame() {
+    public InicioAppJDialog() {
+        setVisible(true);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Bienvenido al Sistema de Atencion del Restaurante");
-        controlador = new ControladorVentanaPrincipal(this);
     }
 
     /**
@@ -39,9 +35,9 @@ public class VentantaPrincipalJFrame extends javax.swing.JFrame implements Vista
     private void initComponents() {
 
         btnMozo = new javax.swing.JButton();
-        btnGestor = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         btnMozo.setText("MOZO");
@@ -51,49 +47,45 @@ public class VentantaPrincipalJFrame extends javax.swing.JFrame implements Vista
             }
         });
         getContentPane().add(btnMozo);
-        btnMozo.setBounds(60, 90, 110, 80);
+        btnMozo.setBounds(50, 90, 120, 90);
 
-        btnGestor.setText("GESTOR");
-        btnGestor.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("GESTOR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGestorActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGestor);
-        btnGestor.setBounds(220, 90, 110, 80);
+        getContentPane().add(jButton2);
+        jButton2.setBounds(220, 90, 120, 90);
 
         setBounds(0, 0, 416, 339);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMozoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMozoActionPerformed
-        // TODO add your handling code here:
         iniciarInterfaceMozo();
     }//GEN-LAST:event_btnMozoActionPerformed
 
-    private void btnGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorActionPerformed
-        // TODO add your handling code here:
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         iniciarInterfaceGestor();
-    }//GEN-LAST:event_btnGestorActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGestor;
     private javax.swing.JButton btnMozo;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void iniciarInterfaceMozo() {
-        JDialog l = new LoginDialogMozo(this, rootPaneCheckingEnabled);
+        dispose();
+        JDialog l = new LoginDialogMozo();
         l.setVisible(true);
-      
     }
 
     @Override
     public void iniciarInterfaceGestor() {
-        JDialog l = new LoginDialogGestor(this, rootPaneCheckingEnabled);
+        dispose();
+        JDialog l = new LoginDialogGestor();
         l.setVisible(true);
     }
 }

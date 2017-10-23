@@ -57,14 +57,15 @@ public class Articulo {
         this.up = up;
     }
 
-    public Articulo(Integer codigo, String nombre, Double precio, Integer stock) {
+    public Articulo(Integer codigo, String nombre, Double precio, Integer stock, UnidadProcesadora up) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
-//        this.up = up;
+        this.up = up;
     }
     
+    @Override
     public String toString(){             
         return getNombre() + " - Stock: " + getStock();
     }

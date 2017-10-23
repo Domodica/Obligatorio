@@ -22,12 +22,10 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
     private ControladorLoginGestor controlador;
     private Container padre;
 
-    public LoginDialogGestor(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public LoginDialogGestor() {
         initComponents();
         setLocationRelativeTo(null);
         controlador = new ControladorLoginGestor(this);
-        padre = parent;
     }
 
     /**
@@ -138,6 +136,7 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
         System.out.println("ingreso " + gestor.getNombre());
         padre.removeAll();
         padre.setLayout(null);
+       
      
         
     }

@@ -5,23 +5,23 @@
  */
 package vistaMozo;
 
-import controlador.ControladorAgregarItem;
-import controlador.VistaAgregarItem;
+import controlador.ControladorMozo;
+import java.util.ArrayList;
+import modelo.Articulo;
 
 /**
  *
  * @author simonlg
  */
-public class AgregarItemJDialog extends javax.swing.JDialog implements VistaAgregarItem{
-
-
-    private ControladorAgregarItem controlador;
+public class AgregarItemJDialog extends javax.swing.JDialog{
     
-    public AgregarItemJDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    private ControladorMozo controlador;
+    
+    public AgregarItemJDialog(ControladorMozo pControlador) {
         initComponents();
+        setModal(true);
         setLocationRelativeTo(null);
-        controlador = new ControladorAgregarItem(this);
+        controlador = pControlador;
         mostarListaArticulos();
     }
 
@@ -96,8 +96,8 @@ public class AgregarItemJDialog extends javax.swing.JDialog implements VistaAgre
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        agregarItem();
-        mostarListaArticulos();
+//        agregarItem();
+       
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     /**
@@ -116,13 +116,10 @@ public class AgregarItemJDialog extends javax.swing.JDialog implements VistaAgre
     private javax.swing.JTextArea txtDescripcion;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void agregarItem() {
-        
-    }
 
     private void mostarListaArticulos() {
        this.listaArticulos.removeAll();
-       this.listaArticulos.setListData(controlador.getArticulosDisponibles().toArray());
+       ArrayList<Articulo> a = controlador.articulosDisponibles();      
+       this.listaArticulos.setListData(controlador.articulosDisponibles().toArray());
     }
 }

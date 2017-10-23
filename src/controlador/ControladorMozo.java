@@ -8,10 +8,12 @@ package controlador;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.JOptionPane;
+import modelo.Articulo;
+import modelo.Item;
 import modelo.Mesa;
 import modelo.Mozo;
-import vistaMozo.ServicioMesa;
+import modelo.Servicio;
+import modelo.Sistema;
 
 /**
  *
@@ -22,6 +24,8 @@ public class ControladorMozo implements Observer{
     private Mesa seleccionada;
     private VistaMozo vista;
     private Mozo mozo;
+    private Sistema fachada = Sistema.getInstancia();
+    private Item item;
 
     public ControladorMozo(VistaMozo vista, Mozo mozo) {
         this.vista = vista;
@@ -33,26 +37,28 @@ public class ControladorMozo implements Observer{
         seleccionada = m;
         vista.mostrarNumeroMesaSeleccionada(m.getNumero());
     }
-
+    
+//  public void verServicio() {
+//        if(seleccionada.getAbierta())
+//            new ServicioMesa(seleccionada).setVisible(true);
+//    }
+  
     public void abrir() {
-        if (seleccionada != null) {
+        if (seleccionada != null && !seleccionada.getAbierta()) {
             seleccionada.setAbierta(true);
+            seleccionada.setServicio(new Servicio());
             vista.mostrarMesas(mozo.getListaMesas());
-            
-
         }
+    }
+    
+    public ArrayList<Articulo> articulosDisponibles(){
+        return fachada.getArticulosDisponibles();
     }
 
     @Override
     public void update(Observable o, Object arg) { 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }  
 
-    public void verServicio() {
-        if(seleccionada.getAbierta())
-            new ServicioMesa(seleccionada).setVisible(true);
-    }
-
-    
 
 }

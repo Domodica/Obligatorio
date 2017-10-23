@@ -53,16 +53,16 @@ public class Sistema {
         sa.agregarMesa(nombreMozo, libre, numero);
     }
 
-    public void agregarArt(Integer codigo, String nombre, Double precio, Integer stock) {
-        sa.agregarArt(codigo, nombre, precio, stock);
+    public void agregar(Articulo art) {
+        sa.agregar(art);
     }
 
     public ArrayList<Mozo> getMozos() {
         return sa.getMozos();
     }
 
-    public ArrayList<Articulo> getArticulos() {
-        return sa.getArticulos();
+    public ArrayList<Articulo> getArticulosDisponibles() {
+        return sa.getArticulosDisponibles();
     }
 
     public ArrayList<Gestor> getGestores() {

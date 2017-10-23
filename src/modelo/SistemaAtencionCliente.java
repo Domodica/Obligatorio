@@ -13,6 +13,9 @@ import java.util.ArrayList;
  */
 public class SistemaAtencionCliente {
 
+    private ArrayList<Mozo> mozos = new ArrayList();
+    private ArrayList<Articulo> articulos = new ArrayList();
+
     public ArrayList<Mozo> getMozos() {
         return mozos;
     }
@@ -29,11 +32,12 @@ public class SistemaAtencionCliente {
         this.articulos = articulos;
     }
 
-    private ArrayList<Mozo> mozos = new ArrayList();
-    private ArrayList<Articulo> articulos = new ArrayList();
-
     public void agregar(Mozo m) {
         mozos.add(m);
+    }
+
+    public void agregar(Articulo art) {
+        articulos.add(art);
     }
 
     public Mozo login(String n, String p) {
@@ -57,57 +61,18 @@ public class SistemaAtencionCliente {
         }
     }
 
-    public void agregarArticuloAlServicio(){
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //este es para cargar los datos
-    public void agregarArt(Integer codigo, String nombre, Double precio, Integer stock){
-        Articulo nuevo = new Articulo(codigo, nombre, precio, stock);
-        articulos.add(nuevo);
+    public void agregarArticuloAlServicio() {
+
     }
 
-    
-    
+    public ArrayList<Articulo> getArticulosDisponibles() {
+        ArrayList<Articulo> ret = new ArrayList<>();
+        for (Articulo art : articulos) {
+            if (art.getStock() > 0) {
+                ret.add(art);
+            }
+        }
+        return ret;
+    }
+
 }

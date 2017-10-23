@@ -6,6 +6,7 @@
 package controlador;
 
 import java.util.ArrayList;
+import modelo.Item;
 import modelo.Mesa;
 
 /**
@@ -17,5 +18,11 @@ public interface VistaMozo {
     public void mostrarNumeroMesaSeleccionada(int numero);
 
     public void mostrarMesas(ArrayList<Mesa> mesas);
+    
+    public void agregarItem(); 
+    
+    public void transferirMesa();
+    
+    
 
 }
