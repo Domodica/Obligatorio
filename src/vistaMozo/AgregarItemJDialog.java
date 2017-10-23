@@ -96,8 +96,7 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-//        agregarItem();
-       
+        agregarItemAlServicio();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     /**
@@ -117,6 +116,13 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
     // End of variables declaration//GEN-END:variables
 
 
+    private void agregarItemAlServicio(){
+        Integer cantidad = Integer.parseInt(txtCantidad.getText());
+        String des = txtDescripcion.getText();
+        System.out.println(""+ listaArticulos.getSelectedValue());
+        controlador.getFachada().agregarArticuloAlServicio(cantidad, des, (Articulo)listaArticulos.getSelectedValue(), controlador.getSeleccionada());    
+    }
+    
     private void mostarListaArticulos() {
        this.listaArticulos.removeAll();
        ArrayList<Articulo> a = controlador.articulosDisponibles();      

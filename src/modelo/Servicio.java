@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Servicio {
     
-    private ArrayList<Item> items;
+    private ArrayList<Item> items = new ArrayList<>();
     private Double total;
 
     public ArrayList<Item> getItems() {

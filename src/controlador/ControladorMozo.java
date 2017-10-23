@@ -27,6 +27,38 @@ public class ControladorMozo implements Observer{
     private Sistema fachada = Sistema.getInstancia();
     private Item item;
 
+    public Mesa getSeleccionada() {
+        return seleccionada;
+    }
+
+    public void setSeleccionada(Mesa seleccionada) {
+        this.seleccionada = seleccionada;
+    }
+
+    public Mozo getMozo() {
+        return mozo;
+    }
+
+    public void setMozo(Mozo mozo) {
+        this.mozo = mozo;
+    }
+
+    public Sistema getFachada() {
+        return fachada;
+    }
+
+    public void setFachada(Sistema fachada) {
+        this.fachada = fachada;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
     public ControladorMozo(VistaMozo vista, Mozo mozo) {
         this.vista = vista;
         this.mozo = mozo;

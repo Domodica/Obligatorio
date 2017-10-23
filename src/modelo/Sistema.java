@@ -25,6 +25,10 @@ public class Sistema {
     private Sistema() {
     }
 
+    public void agregarArticuloAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
+        sa.agregarArticuloAlServicio(cantidad, des, art, mesa);
+    }
+
     public Mozo loginMozo(String n, String p) {
         return sa.login(n, p);
     }
