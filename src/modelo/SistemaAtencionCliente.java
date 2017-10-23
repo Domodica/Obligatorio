@@ -50,16 +50,16 @@ public class SistemaAtencionCliente {
         return null;
     }
 
-    public void agregarMesa(String nombreMozo, Boolean libre, Integer numero) {
-
-        for (Mozo m : mozos) {
-            if (m.getNombre().equals(nombreMozo)) {
-
-                Mesa nuevaMesa = new Mesa(libre, numero);
-                m.agregarMesa(nuevaMesa);
-            }
-        }
-    }
+//    public void agregarMesa(String nombreMozo, Boolean libre, Integer numero, Mozo mozo) {
+//
+//        for (Mozo m : mozos) {
+//            if (m.getNombre().equals(nombreMozo)) {
+//
+//                Mesa nuevaMesa = new Mesa(libre, numero, mozo);
+//                m.agregarMesa(nuevaMesa);
+//            }
+//        }
+//    }
 
     public void agregarArticuloAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
         if (art.getStock() >= cantidad && cantidad > 0) {

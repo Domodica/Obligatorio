@@ -14,7 +14,10 @@ import java.util.ArrayList;
 public class SistemaProcesadorPedidos {
     
     private ArrayList<Gestor> gestores = new ArrayList();
-
+   private ArrayList<UnidadProcesadora> unidadesProcesadoras = new ArrayList<>();
+   
+   
+   
     public ArrayList<Gestor> getGestores() {
         return gestores;
     }
@@ -30,7 +33,7 @@ public class SistemaProcesadorPedidos {
     public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> unidadesProcesadoras) {
         this.unidadesProcesadoras = unidadesProcesadoras;
     }
-    private ArrayList<UnidadProcesadora> unidadesProcesadoras = new ArrayList<>();
+ 
     
     public void agregar(Gestor g) {
         gestores.add(g);
@@ -54,4 +57,5 @@ public class SistemaProcesadorPedidos {
         g.setUp(up);
     }
     
+  
 }

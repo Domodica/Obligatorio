@@ -125,6 +125,7 @@ public class LoginDialogMozo extends javax.swing.JDialog implements VistaLoginMo
         InfoMesaPanel pi = new InfoMesaPanel();
         PanelPalMozoEstatico pe = new PanelPalMozoEstatico(pm, mozo, pi);
         PanelContainerMozo pp = new PanelContainerMozo(pe, pm, pi);
+        f.setTitle("Bienvenido " + mozo.getNombreCompleto());
         f.setContentPane(pp);
         f.setVisible(true);
     }

@@ -10,6 +10,7 @@ import controlador.VistaLoginGestor;
 import java.awt.Container;
 import java.awt.GridLayout;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Gestor;
 
@@ -20,7 +21,6 @@ import modelo.Gestor;
 public class LoginDialogGestor extends javax.swing.JDialog implements VistaLoginGestor {
 
     private ControladorLoginGestor controlador;
-    private Container padre;
 
     public LoginDialogGestor() {
         initComponents();
@@ -44,22 +44,31 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
         login = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Usuario");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(47, 31, 36, 14);
 
         jLabel2.setText("Password");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(47, 78, 46, 14);
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
             }
         });
+        getContentPane().add(nombre);
+        nombre.setBounds(111, 22, 133, 32);
 
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
             }
         });
+        getContentPane().add(password);
+        password.setBounds(111, 78, 133, 36);
 
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -67,41 +76,10 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
                 loginActionPerformed(evt);
             }
         });
+        getContentPane().add(login);
+        login.setBounds(111, 132, 82, 33);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                        .addComponent(password))
-                    .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pack();
+        setBounds(0, 0, 301, 215);
     }// </editor-fold>//GEN-END:initComponents
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
@@ -132,12 +110,11 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
     @Override
     public void ingresar(Gestor gestor) {
         dispose();
-        gestor.setLogueado(true);
-        System.out.println("ingreso " + gestor.getNombre());
-        padre.removeAll();
-        padre.setLayout(null);
-       
-     
+        JDialog l = new SeleccionUP_JDialog(gestor);
+        l.setVisible(true);
+        
+        
+        
         
     }
 
@@ -149,8 +126,8 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
     private javax.swing.JTextField password;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void seleccionarUP() {
-        
-    }
+    
+   
+
+   
 }

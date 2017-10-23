@@ -14,7 +14,30 @@ import java.util.ArrayList;
 public class Gestor extends Usuario {
 
     private UnidadProcesadora up;
+    private ArrayList<Pedido> tomados;
+    private ArrayList<Pedido> finalizados;
 
+    public ArrayList<Pedido> getTomados() {
+        return tomados;
+    }
+
+    public void setTomados(ArrayList<Pedido> tomados) {
+        this.tomados = tomados;
+    }
+
+    public ArrayList<Pedido> getFinalizados() {
+        return finalizados;
+    }
+
+    public void setFinalizados(ArrayList<Pedido> finalizados) {
+        this.finalizados = finalizados;
+    }
+    
+    
+    
+    
+    
+    
     public UnidadProcesadora getUp() {
         return up;
     }
@@ -24,6 +47,8 @@ public class Gestor extends Usuario {
 
     public Gestor(String nombreCompleto, String nombre, String password, Boolean logueado) {
         super(nombreCompleto, nombre, password, logueado);
+        this.finalizados = new ArrayList<>();
+        this.tomados = new ArrayList<>();
 
     }
 

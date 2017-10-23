@@ -11,15 +11,11 @@ import java.util.ArrayList;
  *
  * @author simonlg
  */
-public class Mozo extends Usuario{
+public class Mozo extends Usuario {
 
     private ArrayList<Mesa> listaMesas;
     private Transferencia transferencia;
 
-    
-    public enum eventos{refreshMesas;} ///////////////////////////
-
- 
     public ArrayList<Mesa> getListaMesas() {
         return listaMesas;
     }
@@ -35,15 +31,24 @@ public class Mozo extends Usuario{
     public void setTransferencia(Transferencia transferencia) {
         this.transferencia = transferencia;
     }
-    
-     public Mozo(String nombreCompleto, String nombre, String password, Boolean logueado) {
+
+    public Mozo(String nombreCompleto, String nombre, String password, Boolean logueado) {
         super(nombreCompleto, nombre, password, logueado);
 
         this.listaMesas = new ArrayList<>();
     }
-     
-     public void agregarMesa(Mesa m){ /////////////////////////////////
-         this.listaMesas.add(m);
-     }
-    
+
+    public void agregarMesa(Mesa m) { /////////////////////////////////
+        this.listaMesas.add(m);
+    }
+
+    private void avisar(eventos eventos) {
+        setChanged();
+        notifyObservers(eventos);
+    }
+
+    public enum eventos {
+        agregarArticulo;
+    }
+
 }

@@ -10,10 +10,9 @@ package controlador;
  * @author simonlg
  */
 public interface VistaGestor {
-    
+
     public void mostrarUnidadesProcesadoras();
-    
+
     public void ingresarPuesto();
-    
-    
+
 }

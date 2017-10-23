@@ -46,21 +46,21 @@ public class UnidadProcesadora extends Observable{
         this.pendientes = pendientes;
     }
 
-    public ArrayList<Pedido> getTomados() {
-        return tomados;
-    }
-
-    public void setTomados(ArrayList<Pedido> tomados) {
-        this.tomados = tomados;
-    }
-
-    public ArrayList<Pedido> getFinalizados() {
-        return finalizados;
-    }
-
-    public void setFinalizados(ArrayList<Pedido> finalizados) {
-        this.finalizados = finalizados;
-    }
+//    public ArrayList<Pedido> getTomados() {
+//        return tomados;
+//    }
+//
+//    public void setTomados(ArrayList<Pedido> tomados) {
+//        this.tomados = tomados;
+//    }
+//
+//    public ArrayList<Pedido> getFinalizados() {
+//        return finalizados;
+//    }
+//
+//    public void setFinalizados(ArrayList<Pedido> finalizados) {
+//        this.finalizados = finalizados;
+//    }
     
     @Override
     public String toString(){

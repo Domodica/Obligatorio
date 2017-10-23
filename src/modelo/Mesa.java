@@ -12,6 +12,15 @@ public class Mesa {
     private Boolean abierta;
     private Integer numero;
     private Servicio servicio;
+    private Mozo mozo;
+
+    public Mozo getMozo() {
+        return mozo;
+    }
+
+    public void setMozo(Mozo mozo) {
+        this.mozo = mozo;
+    }
     
     public Boolean getAbierta() {
         return abierta;
@@ -37,9 +46,11 @@ public class Mesa {
         this.servicio = servicio;
     }
 
-    public Mesa(Boolean libre, Integer numero) {
+    public Mesa(Boolean libre, Integer numero, Mozo mozo) {
         this.abierta = libre;
         this.numero = numero;
+        this.mozo = mozo;
+        mozo.agregarMesa(this);
     }
     
 

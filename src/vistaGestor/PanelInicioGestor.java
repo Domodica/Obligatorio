@@ -7,24 +7,23 @@ package vistaGestor;
 
 import controlador.ControladorGestor;
 import controlador.VistaGestor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import modelo.Gestor;
+import modelo.UnidadProcesadora;
 
 /**
  *
  * @author simonlg
  */
-public class PanelInicioGestor extends javax.swing.JPanel implements ActionListener,VistaGestor{
+public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor {
 
     /**
      * Creates new form PanelInicioGestor
      */
     private ControladorGestor controlador;
     
-    
-    public PanelInicioGestor() {
+    public PanelInicioGestor(ControladorGestor pControlador) {
         initComponents();
-        
+        controlador = pControlador;
     }
 
     /**
@@ -36,46 +35,32 @@ public class PanelInicioGestor extends javax.swing.JPanel implements ActionListe
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cBoxUniProcesadoras = new javax.swing.JComboBox();
-        jLabel1 = new javax.swing.JLabel();
-        btnAceptar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listUnidadesP = new javax.swing.JList();
 
         setLayout(null);
 
-        cBoxUniProcesadoras.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        add(cBoxUniProcesadoras);
-        cBoxUniProcesadoras.setBounds(180, 40, 140, 30);
+        jScrollPane1.setViewportView(listUnidadesP);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Seleccione la UP:");
-        add(jLabel1);
-        jLabel1.setBounds(30, 30, 160, 60);
-
-        btnAceptar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAceptar.setText("ACEPTAR");
-        add(btnAceptar);
-        btnAceptar.setBounds(110, 140, 120, 40);
+        add(jScrollPane1);
+        jScrollPane1.setBounds(80, 50, 550, 140);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JComboBox cBoxUniProcesadoras;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listUnidadesP;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public void mostrarUnidadesProcesadoras() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
-
+    
     @Override
     public void ingresarPuesto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+
 }

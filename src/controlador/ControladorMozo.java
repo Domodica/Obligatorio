@@ -62,7 +62,9 @@ public class ControladorMozo implements Observer{
     public ControladorMozo(VistaMozo vista, Mozo mozo) {
         this.vista = vista;
         this.mozo = mozo;
+        this.mozo.addObserver(this);
         vista.mostrarMesas(mozo.getListaMesas());
+        
     }
 
     public void seleccionar(Mesa m) {

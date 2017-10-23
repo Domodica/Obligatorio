@@ -27,6 +27,7 @@ public class Sistema {
 
     public void agregarArticuloAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
         sa.agregarArticuloAlServicio(cantidad, des, art, mesa);
+        
     }
 
     public Mozo loginMozo(String n, String p) {
@@ -53,9 +54,9 @@ public class Sistema {
         spp.asignarUPaGestor(g, up);
     }
        
-    public void agregarMesa(String nombreMozo, Boolean libre, Integer numero){ ///////////////////////////
-        sa.agregarMesa(nombreMozo, libre, numero);
-    }
+//    public void agregarMesa(Mesa mesa){ 
+//        sa.agregarMesa(mesa);
+//    }
 
     public void agregar(Articulo art) {
         sa.agregar(art);
