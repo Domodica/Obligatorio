@@ -24,6 +24,7 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
     public PanelInicioGestor(ControladorGestor pControlador) {
         initComponents();
         controlador = pControlador;
+        controlador.setVista(this);
         controlador.getGestor().getUp().addObserver(controlador);
     }
 
@@ -38,6 +39,7 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
 
         jScrollPane1 = new javax.swing.JScrollPane();
         listPedidosPendientes = new javax.swing.JList();
+        jButton1 = new javax.swing.JButton();
 
         setLayout(null);
 
@@ -45,10 +47,25 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
 
         add(jScrollPane1);
         jScrollPane1.setBounds(80, 50, 550, 140);
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1);
+        jButton1.setBounds(300, 300, 73, 23);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         
+        System.out.println("hola"+controlador.getGestor().getUp().countObservers());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList listPedidosPendientes;
     // End of variables declaration//GEN-END:variables
@@ -65,7 +82,9 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
 
     @Override
     public void mostrarPedidosPendientes() {
+        listPedidosPendientes.removeAll();
         listPedidosPendientes.setListData(controlador.getGestor().getUp().getPendientes().toArray());
+        listPedidosPendientes.repaint();
     }
     
 

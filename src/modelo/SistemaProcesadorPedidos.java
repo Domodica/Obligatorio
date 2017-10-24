@@ -19,12 +19,15 @@ public class SistemaProcesadorPedidos {
     public ArrayList<Gestor> getGestores() {
         return gestores;
     }
+
     public void setGestores(ArrayList<Gestor> gestores) {
         this.gestores = gestores;
     }
+
     public ArrayList<UnidadProcesadora> getUnidadesProcesadoras() {
         return unidadesProcesadoras;
     }
+
     public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> unidadesProcesadoras) {
         this.unidadesProcesadoras = unidadesProcesadoras;
     }
@@ -51,13 +54,13 @@ public class SistemaProcesadorPedidos {
         g.setUp(up);
     }
 
-    public void agregarPedidoPendiente(Pedido pedido){
-        for(UnidadProcesadora up : unidadesProcesadoras){
-            if(pedido.getItem().getArt().getUp().equals(up))
+    public void agregarPedidoPendiente(Pedido pedido) {
+        for (UnidadProcesadora up : unidadesProcesadoras) {
+            if (pedido.getItem().getArt().getUp().equals(up)) {
                 up.getPendientes().add(pedido);
-        }  
+                up.avisar(UnidadProcesadora.eventos.nuevoPedido);
+            }
+        }
     }
-    
-    
-    
+
 }

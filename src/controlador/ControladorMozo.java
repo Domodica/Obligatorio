@@ -39,9 +39,6 @@ public class ControladorMozo implements Observer{
     public Sistema getFachada() {
         return fachada;
     }
-    public void setFachada(Sistema fachada) {
-        this.fachada = fachada;
-    }
     public Item getItem() {
         return item;
     }

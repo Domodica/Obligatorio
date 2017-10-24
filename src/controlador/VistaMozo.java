@@ -6,7 +6,6 @@
 package controlador;
 
 import java.util.ArrayList;
-import modelo.Item;
 import modelo.Mesa;
 
 /**

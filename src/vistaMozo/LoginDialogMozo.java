@@ -5,7 +5,6 @@
  */
 package vistaMozo;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import controlador.ControladorLoginMozo;
 import javax.swing.JOptionPane;
 import controlador.VistaLoginMozo;

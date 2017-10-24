@@ -47,7 +47,7 @@ public class Pedido {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-    
+
     @Override
     public String toString(){
         return item.getArt().getNombre() + " cantidad: " + item.getCantidad() + " " + item.getDescripcion() + " Mesa:  " + mesa.getNumero() + " " + mesa.getMozo().getNombreCompleto();

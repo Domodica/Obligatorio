@@ -10,6 +10,7 @@ import java.util.Observer;
 import modelo.Gestor;
 import modelo.Mozo;
 import modelo.Sistema;
+import modelo.UnidadProcesadora;
 
 /**
  *
@@ -48,7 +49,7 @@ public class ControladorGestor implements Observer{
      
     @Override
     public void update(Observable origen, Object evento) {
-        if(evento.equals(Mozo.eventos.agregarArticulo)){
+        if(evento.equals(UnidadProcesadora.eventos.nuevoPedido)){
             cargarPedidosPendientes();
         }
 //        if(evento.equals(Contador.eventos.maximo)){

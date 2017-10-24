@@ -105,6 +105,6 @@ public class SeleccionUP_JDialog extends javax.swing.JDialog implements VistaGes
 
     @Override
     public void mostrarPedidosPendientes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }
