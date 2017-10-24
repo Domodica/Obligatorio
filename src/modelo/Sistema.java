@@ -29,6 +29,18 @@ public class Sistema {
         sa.agregarArticuloAlServicio(cantidad, des, art, mesa);
         
     }
+    
+    public void getLogeados(){
+        for(Mozo m : sa.getMozos()){
+            if(m.getLogueado())
+                System.out.println(m.getNombre() + " logeado  ----");
+        }
+        for(Gestor g : spp.getGestores()){
+            if(g.getLogueado())
+                System.out.println(g.getNombre() + " logeado  ----");
+        }
+        
+    }
 
     public Mozo loginMozo(String n, String p) {
         return sa.login(n, p);
@@ -76,6 +88,10 @@ public class Sistema {
 
     public ArrayList<UnidadProcesadora> getUnidadesProcesadoras() {
         return spp.getUnidadesProcesadoras();
+    }
+
+    public void agregarPedidoPendiente(Pedido pedido) {
+        spp.agregarPedidoPendiente(pedido);
     }
     
   

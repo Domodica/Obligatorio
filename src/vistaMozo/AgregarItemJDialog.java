@@ -119,8 +119,7 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
     private void agregarItemAlServicio(){
         Integer cantidad = Integer.parseInt(txtCantidad.getText());
         String des = txtDescripcion.getText();
-        System.out.println(""+ listaArticulos.getSelectedValue());
-        controlador.getFachada().agregarArticuloAlServicio(cantidad, des, (Articulo)listaArticulos.getSelectedValue(), controlador.getSeleccionada());    
+        controlador.agregarItemAlServicio((Articulo)listaArticulos.getSelectedValue(),cantidad,des);    
     }
     
     private void mostarListaArticulos() {

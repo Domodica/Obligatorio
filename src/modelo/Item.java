@@ -18,23 +18,18 @@ public class Item {
     public Articulo getArt() {
         return art;
     }
-
     public void setArt(Articulo art) {
         this.art = art;
     }
-
     public Integer getCantidad() {
         return cantidad;
     }
-
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
-
     public String getDescripcion() {
         return descripcion;
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }

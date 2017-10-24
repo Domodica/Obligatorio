@@ -24,6 +24,7 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
     public PanelInicioGestor(ControladorGestor pControlador) {
         initComponents();
         controlador = pControlador;
+        controlador.getGestor().getUp().addObserver(controlador);
     }
 
     /**
@@ -36,11 +37,11 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        listUnidadesP = new javax.swing.JList();
+        listPedidosPendientes = new javax.swing.JList();
 
         setLayout(null);
 
-        jScrollPane1.setViewportView(listUnidadesP);
+        jScrollPane1.setViewportView(listPedidosPendientes);
 
         add(jScrollPane1);
         jScrollPane1.setBounds(80, 50, 550, 140);
@@ -49,7 +50,7 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList listUnidadesP;
+    private javax.swing.JList listPedidosPendientes;
     // End of variables declaration//GEN-END:variables
 
     
@@ -60,6 +61,11 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
     
     @Override
     public void ingresarPuesto() {
+    }
+
+    @Override
+    public void mostrarPedidosPendientes() {
+        listPedidosPendientes.setListData(controlador.getGestor().getUp().getPendientes().toArray());
     }
     
 

@@ -19,30 +19,26 @@ public class Mozo extends Usuario {
     public ArrayList<Mesa> getListaMesas() {
         return listaMesas;
     }
-
     public void setListaMesas(ArrayList<Mesa> listaMesas) {
         this.listaMesas = listaMesas;
     }
-
     public Transferencia getTransferencia() {
         return transferencia;
     }
-
     public void setTransferencia(Transferencia transferencia) {
         this.transferencia = transferencia;
     }
-
+    
     public Mozo(String nombreCompleto, String nombre, String password, Boolean logueado) {
         super(nombreCompleto, nombre, password, logueado);
-
         this.listaMesas = new ArrayList<>();
     }
 
-    public void agregarMesa(Mesa m) { /////////////////////////////////
+    public void agregarMesa(Mesa m) {
         this.listaMesas.add(m);
     }
 
-    private void avisar(eventos eventos) {
+    public void avisar(eventos eventos) { //esto deberia ser privado o protectes, entonces el item y el pedido se cren en el mozo?
         setChanged();
         notifyObservers(eventos);
     }

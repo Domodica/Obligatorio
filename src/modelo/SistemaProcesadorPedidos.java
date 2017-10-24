@@ -12,37 +12,31 @@ import java.util.ArrayList;
  * @author simonlg
  */
 public class SistemaProcesadorPedidos {
-    
+
     private ArrayList<Gestor> gestores = new ArrayList();
-   private ArrayList<UnidadProcesadora> unidadesProcesadoras = new ArrayList<>();
-   
-   
-   
+    private ArrayList<UnidadProcesadora> unidadesProcesadoras = new ArrayList<>();
+
     public ArrayList<Gestor> getGestores() {
         return gestores;
     }
-
     public void setGestores(ArrayList<Gestor> gestores) {
         this.gestores = gestores;
     }
-
     public ArrayList<UnidadProcesadora> getUnidadesProcesadoras() {
         return unidadesProcesadoras;
     }
-
     public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> unidadesProcesadoras) {
         this.unidadesProcesadoras = unidadesProcesadoras;
     }
- 
-    
+
     public void agregar(Gestor g) {
         gestores.add(g);
     }
-    
+
     public void agregar(UnidadProcesadora uni) {
         unidadesProcesadoras.add(uni);
-    }    
-    
+    }
+
     public Gestor login(String n, String p) {
         for (Gestor g : gestores) {
             if (g.getNombre().equals(n) && g.getPassword().equals(p)) {
@@ -52,10 +46,18 @@ public class SistemaProcesadorPedidos {
         }
         return null;
     }
-    
-    public void asignarUPaGestor(Gestor g, UnidadProcesadora up){
+
+    public void asignarUPaGestor(Gestor g, UnidadProcesadora up) {
         g.setUp(up);
     }
+
+    public void agregarPedidoPendiente(Pedido pedido){
+        for(UnidadProcesadora up : unidadesProcesadoras){
+            if(pedido.getItem().getArt().getUp().equals(up))
+                up.getPendientes().add(pedido);
+        }  
+    }
     
-  
+    
+    
 }

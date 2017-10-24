@@ -19,15 +19,12 @@ public class SistemaAtencionCliente {
     public ArrayList<Mozo> getMozos() {
         return mozos;
     }
-
     public void setMozos(ArrayList<Mozo> mozos) {
         this.mozos = mozos;
     }
-
     public ArrayList<Articulo> getArticulos() {
         return articulos;
     }
-
     public void setArticulos(ArrayList<Articulo> articulos) {
         this.articulos = articulos;
     }
@@ -64,7 +61,7 @@ public class SistemaAtencionCliente {
     public void agregarArticuloAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
         if (art.getStock() >= cantidad && cantidad > 0) {
             mesa.getServicio().agregarItem(new Item(art, cantidad, des));
-            System.out.println("    agregadpo");
+            System.out.println("    agregado");
         }
         
     }

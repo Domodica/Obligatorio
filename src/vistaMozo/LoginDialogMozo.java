@@ -119,6 +119,7 @@ public class LoginDialogMozo extends javax.swing.JDialog implements VistaLoginMo
     @Override
     public void ingresar(Mozo mozo) {
         dispose();
+        mozo.setLogueado(true);
         JFrame f = new JFrame();
         f.setSize(800, 800);
         PanelMesas pm = new PanelMesas();

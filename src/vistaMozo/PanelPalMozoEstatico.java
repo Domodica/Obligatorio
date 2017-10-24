@@ -104,6 +104,7 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
                 break;
             case "TRANSFERIR MESA":
                 System.out.println("    transferir");
+                controlador.getFachada().getLogeados();
                 break;
             case "CERRAR MESA":
                 System.out.println("    cerrar");
@@ -134,6 +135,6 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
 
     @Override
     public void transferirMesa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        controlador.getFachada().getLogeados();
     }
 }

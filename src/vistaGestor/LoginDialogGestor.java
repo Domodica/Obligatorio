@@ -110,6 +110,7 @@ public class LoginDialogGestor extends javax.swing.JDialog implements VistaLogin
     @Override
     public void ingresar(Gestor gestor) {
         dispose();
+        gestor.setLogueado(true);
         JDialog l = new SeleccionUP_JDialog(gestor);
         l.setVisible(true);
         

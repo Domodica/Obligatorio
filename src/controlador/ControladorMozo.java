@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import java.util.ArrayList;
@@ -12,6 +7,7 @@ import modelo.Articulo;
 import modelo.Item;
 import modelo.Mesa;
 import modelo.Mozo;
+import modelo.Pedido;
 import modelo.Servicio;
 import modelo.Sistema;
 
@@ -26,35 +22,29 @@ public class ControladorMozo implements Observer{
     private Mozo mozo;
     private Sistema fachada = Sistema.getInstancia();
     private Item item;
+    private Pedido pedido;
 
     public Mesa getSeleccionada() {
         return seleccionada;
     }
-
     public void setSeleccionada(Mesa seleccionada) {
         this.seleccionada = seleccionada;
     }
-
     public Mozo getMozo() {
         return mozo;
     }
-
     public void setMozo(Mozo mozo) {
         this.mozo = mozo;
     }
-
     public Sistema getFachada() {
         return fachada;
     }
-
     public void setFachada(Sistema fachada) {
         this.fachada = fachada;
     }
-
     public Item getItem() {
         return item;
     }
-
     public void setItem(Item item) {
         this.item = item;
     }
@@ -64,7 +54,6 @@ public class ControladorMozo implements Observer{
         this.mozo = mozo;
         this.mozo.addObserver(this);
         vista.mostrarMesas(mozo.getListaMesas());
-        
     }
 
     public void seleccionar(Mesa m) {
@@ -89,10 +78,22 @@ public class ControladorMozo implements Observer{
         return fachada.getArticulosDisponibles();
     }
 
+    
+    
     @Override
-    public void update(Observable o, Object arg) { 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }  
+    public void update(Observable origen, Object evento) { 
+         if(evento.equals(Mozo.eventos.agregarArticulo)){
+             System.out.println(" entro controlador mozo  ");
+        }
+    }
+    public void agregarItemAlServicio(Articulo articulo, Integer cantidad, String des) {
+       //new en el controlador, pueden ir?
+        item = new Item(articulo,cantidad,des);
+        pedido = new Pedido(item, seleccionada);
+        this.seleccionada.agregarItemServicio(item);
+        fachada.agregarPedidoPendiente(pedido);
+        mozo.avisar(Mozo.eventos.agregarArticulo);
+    }
 
 
 }

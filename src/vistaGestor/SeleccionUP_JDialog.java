@@ -93,7 +93,7 @@ public class SeleccionUP_JDialog extends javax.swing.JDialog implements VistaGes
     @Override
     public void ingresarPuesto() {
         
-        this.controlador.getGestor().setUp((UnidadProcesadora) listUnidadesP.getSelectedValue());
+        this.controlador.getGestor().setUp((UnidadProcesadora) listUnidadesP.getSelectedValue());  
         JFrame f = new JFrame();
         f.setSize(800, 800);
         PanelInicioGestor pi = new PanelInicioGestor(controlador);
@@ -101,5 +101,10 @@ public class SeleccionUP_JDialog extends javax.swing.JDialog implements VistaGes
         f.setContentPane(pi);
         dispose();
         f.setVisible(true);
+    }
+
+    @Override
+    public void mostrarPedidosPendientes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
