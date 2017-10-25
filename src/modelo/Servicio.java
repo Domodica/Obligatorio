@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Servicio {
     
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Item> items;
     private Double total;
 
     public ArrayList<Item> getItems() {
@@ -34,6 +34,11 @@ public class Servicio {
     
     public void agregarItem (Item item){
         items.add(item);
+    }
+
+    public Servicio() {
+        items = new ArrayList<>();
+        total = 0.0;
     }
     
     

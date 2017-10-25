@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import java.util.ArrayList;
@@ -12,7 +7,7 @@ import modelo.Articulo;
 import modelo.Item;
 import modelo.Mesa;
 import modelo.Mozo;
-import modelo.Servicio;
+import modelo.Pedido;
 import modelo.Sistema;
 import modelo.Transferencia;
 import vistaMozo.PanelMesas;
@@ -23,18 +18,19 @@ import vistaMozo.PanelMesas;
  */
 public class ControladorMozo implements Observer {
 
-    private Mesa seleccionada;
+    private Sistema fachada = Sistema.getInstancia();
+    private Mesa mesaSeleccionada;
     private VistaMozo vista;
     private Mozo mozo;
-    private Sistema fachada = Sistema.getInstancia();
     private Item item;
+    private Pedido pedido;
 
-    public Mesa getSeleccionada() {
-        return seleccionada;
+    public Mesa getMesaSeleccionada() {
+        return mesaSeleccionada;
     }
 
-    public void setSeleccionada(Mesa seleccionada) {
-        this.seleccionada = seleccionada;
+    public void setMesaSeleccionada(Mesa seleccionada) {
+        this.mesaSeleccionada = seleccionada;
     }
 
     public Mozo getMozo() {
@@ -49,10 +45,6 @@ public class ControladorMozo implements Observer {
         return fachada;
     }
 
-    public void setFachada(Sistema fachada) {
-        this.fachada = fachada;
-    }
-
     public Item getItem() {
         return item;
     }
@@ -64,6 +56,7 @@ public class ControladorMozo implements Observer {
     public ControladorMozo(VistaMozo vista, Mozo mozo) {
         this.vista = vista;
         this.mozo = mozo;
+        this.mozo.addObserver(this);
         vista.mostrarMesas(mozo.getListaMesas());
 
         //TRANSFERENCIA
@@ -71,27 +64,39 @@ public class ControladorMozo implements Observer {
     }
 
     public void seleccionar(Mesa m) {
-        seleccionada = m;
+        mesaSeleccionada = m;
         vista.mostrarNumeroMesaSeleccionada(m.getNumero());
     }
 
-    public void abrir() {
-        if (seleccionada != null && !seleccionada.getAbierta()) { //////!seleccionada.getAbierta( en LN
-            mozo.abrirMesa(seleccionada); /// PROFE dijo abrirMesa() lo tiene que tener el mozo
-            System.out.println("Mesa abierta");
-            vista.mostrarMesas(mozo.getListaMesas());
+    public void verServicio() {
+        if (mesaSeleccionada != null && mesaSeleccionada.getAbierta()) {
+            vista.verServicioMesa(mesaSeleccionada);
         } else {
-            System.out.println("Para abrir una mesa debe seleccionar una cerrada");
+            vista.error("La mesa seleccionada esta cerrada o no a seleccionado ninguna");
+        }
+    }
+
+    public void abrir() {
+        if (mesaSeleccionada != null) {
+            if (mozo.abrirMesa(mesaSeleccionada)) {
+                vista.mostrarMesas(mozo.getListaMesas());
+            } else {
+                vista.error("La mesa ya se encuentra abierta");
+            }
+        } else {
+            vista.error("No hay mesa seleccionada");
         }
     }
 
     public void cerrar() {
-        if (!fachada.evaluarPedidosPendientesMesa(seleccionada)) {
-            mozo.cerrarMesa(seleccionada);
-            System.out.println("Mesa cerrada");
-            vista.mostrarMesas(mozo.getListaMesas());
+        if (mesaSeleccionada != null) {
+            if (mozo.cerrarMesa(mesaSeleccionada)) {
+                vista.mostrarMesas(mozo.getListaMesas());
+            } else {
+                vista.error("La mesa ya se encuentra cerrada o tiene pedidos pendientes");
+            }
         } else {
-            System.out.println("Para cerrar la mesa no debe tener pedidos pendientes");
+            vista.error("No hay mesa seleccionada");
         }
     }
 
@@ -101,26 +106,48 @@ public class ControladorMozo implements Observer {
 
     @Override
     public void update(Observable origen, Object evento) {
-        if(evento.equals(Mozo.eventos.transferenciaIniciada)){
-            notificarMozoDestino();         
+        if (evento.equals(Mozo.eventos.transferencia)) {
+            notificarMozoDestino();
         }
     }
 
-    public void verServicio() {
-        if (seleccionada != null && seleccionada.getAbierta()) {
-            vista.mostrarListaServicioMesa(seleccionada);
+    public void agregarItemAlServicio(Articulo articulo, Integer cantidad, String des) {
+        if (mesaSeleccionada.getAbierta()) {
+            item = new Item(articulo, cantidad, des);
+            if (fachada.agregarItemServicio(mesaSeleccionada, item)) {
+                pedido = new Pedido(item, mesaSeleccionada);
+                fachada.agregarPedidoPendiente(pedido);
+                vista.mostarListaArticulos();
+            } else {
+                vista.error("No hay stock suficiente para ese pedido");
+            }
         } else {
-            System.out.println("No se puede mostrar el servicio. Seleccione una mesa abierta.");
+            vista.error("La mesa seleccionada debe estar abierta.");
         }
+
     }
 
     public void tranferirMesa() {
-        mozo.solicitudTransferencia(mozo, seleccionada);
+        mozo.solicitarTransferencia(mozo, mesaSeleccionada);
     }
 
     private void notificarMozoDestino() {
-       vista.notificarTransferencia(this.getMozo(), this.getMozo().getTransferencia().getMozoDestino()); 
-        
+        vista.notificarTransferencia(this.getMozo(), this.getMozo().getTransferencia().getMozoDestino(), this.getMesaSeleccionada());
+
     }
 
+    public void errorDatosItem() {
+        vista.error("La cantidad ingresada debe ser un numero entero.");
+    }
+
+    public void agregarNuevoItem() {
+        if(mesaSeleccionada != null && mesaSeleccionada.getAbierta())
+            vista.agregarItem();
+        else
+            vista.error("La mesa se encuentra cerrada o no ha seleccionado ninguna");
+    }
+
+    public Mesa getSeleccionada() {
+        return mesaSeleccionada;
+    }
 }

@@ -69,9 +69,7 @@ public class Articulo {
     public String toString(){             
         return getNombre() + " - stock: " + getStock(); ////////////////////////////////////////
     }
-    
-    public void descontarStock(Integer cantidad) { ////////////////////////////////////////
+        public void descontarStock(Integer cantidad) { ////////////////////////////////////////
         this.stock -= cantidad;
     }
-
 }

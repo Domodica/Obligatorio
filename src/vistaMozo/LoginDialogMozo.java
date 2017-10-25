@@ -5,7 +5,6 @@
  */
 package vistaMozo;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import controlador.ControladorLoginMozo;
 import javax.swing.JOptionPane;
 import controlador.VistaLoginMozo;
@@ -128,14 +127,14 @@ public class LoginDialogMozo extends javax.swing.JDialog implements VistaLoginMo
     @Override
     public void ingresar(Mozo mozo) {
         dispose();
+        mozo.setLogueado(true);
         JFrame f = new JFrame();
         f.setSize(700, 700); ////////////////////////////////////////
         PanelMesas pm = new PanelMesas();
         InfoMesaPanel pi = new InfoMesaPanel();
         PanelPalMozoEstatico pe = new PanelPalMozoEstatico(pm, mozo, pi);
         PanelContainerMozo pp = new PanelContainerMozo(pe, pm, pi);
-        f.setLocationRelativeTo(null); ////////////////////////////////////////
-        f.setTitle(mozo.getNombreCompleto()); ////////////////////////////////////////
+        f.setTitle("Bienvenido " + mozo.getNombreCompleto());
         f.setContentPane(pp);
         f.setVisible(true);
     }

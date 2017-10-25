@@ -35,7 +35,6 @@ public class Mozo extends Usuario {
 
     public Mozo(String nombreCompleto, String nombre, String password, Boolean logueado) {
         super(nombreCompleto, nombre, password, logueado);
-
         this.listaMesas = new ArrayList<>();
     }
 
@@ -47,45 +46,7 @@ public class Mozo extends Usuario {
         this.listaMesas.remove(m);
     }
 
-    public boolean tieneMesasAbiertas() {
-        for (Mesa m : getListaMesas()) {
-            if (m.getAbierta()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean tieneTransferenciaPendiente() {
-        return getTransferencia() == null;
-    }
-
-    public void abrirMesa(Mesa seleccionada) {
-        if (seleccionada != null && !seleccionada.getAbierta()) {
-            seleccionada.setAbierta(true);
-            seleccionada.setServicio(new Servicio());
-        } else {
-            System.out.println("Para abrir una mesa debe seleccionar una cerrada");
-        }
-    }
-
-    public void cerrarMesa(Mesa seleccionada) {
-        if (seleccionada != null && seleccionada.getAbierta()) {
-            seleccionada.setAbierta(false);
-            seleccionada = null;
-        } else {
-            System.out.println("Para cerrar una mesa debe seleccionar una abierta");
-        }
-    }
-
-    //TRANSFERENCIA
-    public enum eventos {
-        pedidoListo,
-        transferenciaIniciada,
-        recibirTransferencia;
-    }
-
-    private void avisar(eventos eventos) {
+    public void avisar(eventos eventos) { 
         setChanged();
         notifyObservers(eventos);
     }
@@ -100,12 +61,56 @@ public class Mozo extends Usuario {
         Mesa m = this.getTransferencia().getMesaATransferir();
         this.getTransferencia().getMozoDestino().agregarMesa(m);        
         this.borrarMesa(m);
-        this.transferencia = null;
+        this.transferencia = null;        
     }
 
+    public enum eventos {
+        agregarArticulo, 
+        transferencia, 
+        transferenciaIniciada;
+    }
 
+    public boolean tieneMesasAbiertas() {
+        for (Mesa m : getListaMesas()) {
+            if (m.getAbierta()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void solicitarTransferencia(Mozo mDestino, Mesa seleccionada) {
+        System.out.println("mozo origen: " + this.getNombreCompleto());
+        System.out.println("mozo destino: " + mDestino.getNombreCompleto());
+        Transferencia t = new Transferencia(mDestino, seleccionada); //////////// La creo??
+        this.transferencia = t;
+        avisar(eventos.transferencia);
+    }
+
+    public boolean tieneTransferenciaPendiente() {
+        return getTransferencia() == null;
+    }
+
+    public boolean abrirMesa(Mesa seleccionada) {
+        if (seleccionada != null && !seleccionada.getAbierta()) {
+            seleccionada.abrir();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean cerrarMesa(Mesa seleccionada) {
+        if (seleccionada != null && seleccionada.getAbierta() && !seleccionada.tieneServicioPendiente()) {
+            seleccionada.cerrar();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String toString() {
         return this.getNombreCompleto();
     }
-
 }

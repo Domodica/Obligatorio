@@ -6,7 +6,6 @@
 package controlador;
 
 import java.util.ArrayList;
-import modelo.Item;
 import modelo.Mesa;
 import modelo.Mozo;
 
@@ -15,7 +14,7 @@ import modelo.Mozo;
  * @author simonlg
  */
 public interface VistaMozo {
-
+    
     public void mostrarNumeroMesaSeleccionada(int numero);
 
     public void mostrarMesas(ArrayList<Mesa> mesas);
@@ -28,6 +27,12 @@ public interface VistaMozo {
 
     public void notificarTransferencia(Mozo mozo, Mozo mozoDestino);
     
+    public void verServicioMesa(Mesa seleccionada);
+
+    public void notificarTransferencia(Mozo mozo, Mozo mozoDestino, Mesa seleccionada);
+
+    public void error(String mensaje);
     
+    public void mostarListaArticulos();
 
 }

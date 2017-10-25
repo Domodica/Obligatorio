@@ -20,7 +20,7 @@ import modelo.Mesa;
 public class InfoMesaPanel extends JPanel {
 
     private ActionListener al;
-    private ControladorLoginMozo controlador;
+    private ControladorLoginMozo controlador;//se podria quitar, ya que los botones de este los escucha el panel estatico???
 
     public void setEscuchador(ActionListener al) {
         this.al = al;
@@ -117,7 +117,7 @@ public class InfoMesaPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTransferirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirMesaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnTransferirMesaActionPerformed
 
     private void btnCerrarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarMesaActionPerformed

@@ -101,18 +101,19 @@ public class AgregarItemJDialog extends javax.swing.JDialog {
         setBounds(0, 0, 668, 392);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadActionPerformed
-
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         agregarItemAlServicio();       
     }//GEN-LAST:event_btnEnviarActionPerformed
 
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
+
     private void okSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okSolicitudActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_okSolicitudActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -131,18 +132,20 @@ public class AgregarItemJDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void agregarItemAlServicio() {
-        Integer cantidad = Integer.parseInt(txtCantidad.getText()); //////////// Pendiente verificar que sea numerico
-        String des = txtDescripcion.getText();       
-        Articulo art = (Articulo)listaArticulos.getSelectedValue();   
-        controlador.getFachada().agregarItemAlServicio(cantidad, des, art, controlador.getSeleccionada());  //////////////DIF CON GABY
-        mostarListaArticulos(); 
-        
+        try {
+            Integer cantidad = Integer.parseInt(txtCantidad.getText());
+            String des = txtDescripcion.getText();
+            Articulo art = (Articulo) listaArticulos.getSelectedValue();
+            controlador.agregarItemAlServicio(art, cantidad, des);
+            mostarListaArticulos();
+        } catch (Exception e) {
+            controlador.errorDatosItem();
+        }
     }
-
+    
     private void mostarListaArticulos() {
         this.listaArticulos.removeAll();
         ArrayList<Articulo> a = controlador.articulosDisponibles();
         this.listaArticulos.setListData(controlador.articulosDisponibles().toArray());
     }
-    
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 /**
@@ -13,8 +8,14 @@ public class Pedido {
 
     private Item item;
     private Mesa mesa;
-    private String estado; //////////////// Deberia ser un enumerable
-    //private enum estado{Pendiente,Tomado,Finalizado;}
+
+    private Estado estado;
+    
+    public Pedido(Item item, Mesa mesa) {
+        this.item = item;
+        this.mesa = mesa;
+        this.estado = Estado.PENDIENTE;
+    }
 
     public Item getItem() {
         return item;
@@ -32,30 +33,27 @@ public class Pedido {
         this.mesa = mesa;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
-    public Pedido(Item item, Mesa mesa) {
-        this.item = item;
-        this.mesa = mesa;
-        this.estado = "Pendiente"; ////// Cuando creo el pedido el estado por defecto es Pendiente
-    }
-
     public void cambiarEstadoATomado() {
-        if (this.estado.equals("Pendiente")) {
-            this.estado = "Tomado";
+        if (this.estado.equals(estado.PENDIENTE)) {
+            this.estado = Estado.PROCESANDO;
+        }
+    }
+        public void cambiarEstadoAFinalizado() {
+        if (this.estado.equals(estado.PROCESANDO)) {
+            this.estado = Estado.TERMINADO;
         }
     }
 
-    public void cambiarEstadoAFinalizado() {
-        if (this.estado.equals("Tomado")) {
-            this.estado = "Finalizado";
-        }
+    @Override
+    public String toString() {
+        return item.getArt().getNombre() + " cantidad: " + item.getCantidad() + " " + item.getDescripcion() + " Mesa:  " + mesa.getNumero() + " " + mesa.getMozo().getNombreCompleto();
     }
-
 }

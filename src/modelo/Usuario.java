@@ -56,7 +56,7 @@ public abstract class Usuario extends Observable {
         this.password = password;
         this.logueado = logueado;
     }
-    
-    
-    
+
+
+
 }
