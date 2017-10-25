@@ -37,12 +37,12 @@ public class Mesa {
         this.servicio = servicio;
     }
 
-    public Mesa(Boolean libre, Integer numero) {
+    public Mesa(Boolean libre, Integer numero) { 
         this.abierta = libre;
         this.numero = numero;
     }
+
+
     
-
-
 }
 

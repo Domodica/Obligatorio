@@ -7,17 +7,21 @@ package vistaMozo;
 
 import controlador.ControladorLoginMozo;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import modelo.Item;
+import modelo.Mesa;
 
 /**
  *
  * @author simonlg
  */
-public class InfoMesaPanel extends JPanel{
+public class InfoMesaPanel extends JPanel {
 
     private ActionListener al;
     private ControladorLoginMozo controlador;
-    
+
     public void setEscuchador(ActionListener al) {
         this.al = al;
         btnAgregarArt.addActionListener(al);
@@ -25,9 +29,18 @@ public class InfoMesaPanel extends JPanel{
         btnTransferirMesa.addActionListener(al);
     }
 
+    DefaultTableModel modelo;
+
     public InfoMesaPanel() {
         initComponents();
-        
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Artículo");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Subtotal");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Gestor");
+        this.tableItemsConsumidos.setModel(modelo);
     }
 
     /**
@@ -42,43 +55,34 @@ public class InfoMesaPanel extends JPanel{
         jScrollPane1 = new javax.swing.JScrollPane();
         tableItemsConsumidos = new javax.swing.JTable();
         btnTransferirMesa = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JLabel();
         btnAgregarArt = new javax.swing.JButton();
         btnCerrarMesa = new javax.swing.JButton();
-        lblTotalServicio = new javax.swing.JLabel();
 
         setLayout(null);
 
         tableItemsConsumidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Nombre artículo", "Cantidad", "$ unitario", "Sub-total", "Estado", "Gestor"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Object.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         jScrollPane1.setViewportView(tableItemsConsumidos);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(10, 10, 560, 150);
+        jScrollPane1.setBounds(10, 10, 650, 130);
 
         btnTransferirMesa.setText("TRANSFERIR MESA");
         btnTransferirMesa.addActionListener(new java.awt.event.ActionListener() {
@@ -87,11 +91,11 @@ public class InfoMesaPanel extends JPanel{
             }
         });
         add(btnTransferirMesa);
-        btnTransferirMesa.setBounds(70, 240, 180, 50);
+        btnTransferirMesa.setBounds(280, 150, 180, 50);
 
-        jLabel2.setText("Total:");
-        add(jLabel2);
-        jLabel2.setBounds(380, 180, 40, 40);
+        txtTotal.setText("Total:");
+        add(txtTotal);
+        txtTotal.setBounds(180, 150, 100, 40);
 
         btnAgregarArt.setText("AGREGAR ITEM");
         btnAgregarArt.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +104,7 @@ public class InfoMesaPanel extends JPanel{
             }
         });
         add(btnAgregarArt);
-        btnAgregarArt.setBounds(130, 180, 160, 40);
+        btnAgregarArt.setBounds(10, 150, 160, 40);
 
         btnCerrarMesa.setText("CERRAR MESA");
         btnCerrarMesa.addActionListener(new java.awt.event.ActionListener() {
@@ -109,9 +113,7 @@ public class InfoMesaPanel extends JPanel{
             }
         });
         add(btnCerrarMesa);
-        btnCerrarMesa.setBounds(340, 240, 190, 50);
-        add(lblTotalServicio);
-        lblTotalServicio.setBounds(440, 180, 80, 40);
+        btnCerrarMesa.setBounds(470, 150, 190, 50);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTransferirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirMesaActionPerformed
@@ -119,7 +121,7 @@ public class InfoMesaPanel extends JPanel{
     }//GEN-LAST:event_btnTransferirMesaActionPerformed
 
     private void btnCerrarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarMesaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnCerrarMesaActionPerformed
 
     private void btnAgregarArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarArtActionPerformed
@@ -131,12 +133,44 @@ public class InfoMesaPanel extends JPanel{
     private javax.swing.JButton btnAgregarArt;
     private javax.swing.JButton btnCerrarMesa;
     private javax.swing.JButton btnTransferirMesa;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblTotalServicio;
     private javax.swing.JTable tableItemsConsumidos;
+    private javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 
+    public void mostrarServicios(Mesa seleccionada) {
+        limpiarTabla();
+        String[] datos = new String[6];
+        double total = 0;
 
+        ArrayList<Item> listaItems = new ArrayList<Item>();
+        listaItems = seleccionada.getServicio().getItems();
+        
+        if (listaItems.size() > 0) {      
+
+            for (Item i : listaItems) {
+                datos[0] = i.getArt().getNombre();
+                datos[1] = i.getCantidad() + "";
+                datos[2] = i.getArt().getPrecio() + "";
+                datos[3] = (i.getCantidad()) * (i.getArt().getPrecio()) + "";
+                datos[4] = " -- FALTA IMPLEMENTAR -- "; //modelo.addColumn("Estado");
+                datos[5] = " -- FALTA IMPLEMENTAR --";  //modelo.addColumn("Gestor");  
+                ////////////////////////Para poder hacer estos vamos a tener que hacer esto desde la Up cuando el pedido este agregado ahi
+                modelo.addRow(datos);
+                
+                total += (double)(i.getCantidad()) * (i.getArt().getPrecio());                              
+            }
+        } else {
+            System.out.println("No hay items en el servicio de la mesa " + seleccionada.getNumero());
+        }
+        txtTotal.setText("Total: " + total);
+    }
+
+    public void limpiarTabla() {
+        int cantFilas = tableItemsConsumidos.getRowCount();
+        for (int i = cantFilas - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
 
 }

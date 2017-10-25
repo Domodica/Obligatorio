@@ -46,6 +46,11 @@ public class LoginDialogMozo extends javax.swing.JDialog implements VistaLoginMo
         login = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jLabel1.setText("Usuario");
@@ -98,6 +103,10 @@ public class LoginDialogMozo extends javax.swing.JDialog implements VistaLoginMo
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -120,11 +129,13 @@ public class LoginDialogMozo extends javax.swing.JDialog implements VistaLoginMo
     public void ingresar(Mozo mozo) {
         dispose();
         JFrame f = new JFrame();
-        f.setSize(800, 800);
+        f.setSize(700, 700); ////////////////////////////////////////
         PanelMesas pm = new PanelMesas();
         InfoMesaPanel pi = new InfoMesaPanel();
         PanelPalMozoEstatico pe = new PanelPalMozoEstatico(pm, mozo, pi);
         PanelContainerMozo pp = new PanelContainerMozo(pe, pm, pi);
+        f.setLocationRelativeTo(null); ////////////////////////////////////////
+        f.setTitle(mozo.getNombreCompleto()); ////////////////////////////////////////
         f.setContentPane(pp);
         f.setVisible(true);
     }

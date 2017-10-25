@@ -19,8 +19,7 @@ public class UnidadProcesadora extends Observable{
     private ArrayList<Pedido> tomados;
     private ArrayList<Pedido> finalizados;
     
-    public void procesarPedido(Pedido p){
-        
+    public void procesarPedido(Pedido p){       
     };
 
     public UnidadProcesadora(String nombre) {
@@ -65,6 +64,19 @@ public class UnidadProcesadora extends Observable{
     @Override
     public String toString(){
         return this.getNombre();
+    }
+    
+    public void agregarPedidoPendiente (Pedido p){
+        this.pendientes.add(p);
+        System.out.println("Pedido pendiente agregado.");
+    }
+    
+    public void agregarPedidoTomado (Pedido p){
+        this.tomados.add(p);
+    }
+    
+    public void agregarPedidoFinalizado (Pedido p){
+        this.finalizados.add(p);
     }
     
 }

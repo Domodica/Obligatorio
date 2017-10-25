@@ -17,27 +17,28 @@ import modelo.Mesa;
  *
  * @author docenteFI
  */
-public class PanelMesas extends JPanel{
-    
+public class PanelMesas extends JPanel {
+
     private ActionListener al;
 
     public void setEscuchador(ActionListener al) {
         this.al = al;
     }
-    
-     public void mostrar(ArrayList<Mesa> mesas,int cols){
+
+    public void mostrar(ArrayList<Mesa> mesas, int cols) {
         removeAll();
-        if(mesas.size()<cols) cols = mesas.size();
-        
-        setLayout(new GridLayout(0,cols));
-        
-        for(Mesa m:mesas){
+        if (mesas.size() < cols) {
+            cols = mesas.size();
+        }
+
+        setLayout(new GridLayout(0, cols));
+
+        for (Mesa m : mesas) {
             BotonMesa b = new BotonMesa(m);
             b.addActionListener(al);
             add(b);
         }
-        validate();       
+        validate();
     }
-    
-    
+
 }

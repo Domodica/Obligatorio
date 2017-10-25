@@ -8,6 +8,7 @@ package controlador;
 import java.util.ArrayList;
 import modelo.Item;
 import modelo.Mesa;
+import modelo.Mozo;
 
 /**
  *
@@ -22,6 +23,10 @@ public interface VistaMozo {
     public void agregarItem(); 
     
     public void transferirMesa();
+
+    public void mostrarListaServicioMesa(Mesa seleccionada);
+
+    public void notificarTransferencia(Mozo mozo, Mozo mozoDestino);
     
     
 

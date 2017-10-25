@@ -10,9 +10,11 @@ import controlador.VistaMozo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import modelo.Item;
+import javax.swing.JDialog;
+
 import modelo.Mesa;
 import modelo.Mozo;
+import vista.InicioAppJDialog;
 
 /**
  *
@@ -54,7 +56,7 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
 
         mesaSel.setText("Mesa seleccionada:");
         add(mesaSel);
-        mesaSel.setBounds(30, 20, 170, 40);
+        mesaSel.setBounds(20, 10, 170, 40);
 
         abrirMesa.setText("ABRIR MESA");
         abrirMesa.addActionListener(new java.awt.event.ActionListener() {
@@ -63,11 +65,16 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
             }
         });
         add(abrirMesa);
-        abrirMesa.setBounds(150, 90, 110, 40);
+        abrirMesa.setBounds(70, 70, 120, 40);
 
         btnSalirSistema.setText("SALIR del sistema");
+        btnSalirSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirSistemaActionPerformed(evt);
+            }
+        });
         add(btnSalirSistema);
-        btnSalirSistema.setBounds(450, 10, 80, 30);
+        btnSalirSistema.setBounds(450, 20, 140, 30);
 
         verServicio.setText("VER SERVICIO");
         verServicio.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +83,7 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
             }
         });
         add(verServicio);
-        verServicio.setBounds(320, 90, 120, 40);
+        verServicio.setBounds(70, 130, 120, 40);
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirMesaActionPerformed
@@ -85,8 +92,12 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
     }//GEN-LAST:event_abrirMesaActionPerformed
 
     private void verServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verServicioActionPerformed
-//        controlador.verServicio();
+        controlador.verServicio();
     }//GEN-LAST:event_verServicioActionPerformed
+
+    private void btnSalirSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirSistemaActionPerformed
+
+    }//GEN-LAST:event_btnSalirSistemaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -103,17 +114,16 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
                 agregarItem();
                 break;
             case "TRANSFERIR MESA":
-                System.out.println("    transferir");
+                transferirMesa();
                 break;
             case "CERRAR MESA":
-                System.out.println("    cerrar");
+                cerrarMesa();
                 break;
             default:
                 BotonMesa b = (BotonMesa) e.getSource();
                 controlador.seleccionar(b.getMesa());
                 break;
         }
-
     }
 
     @Override
@@ -133,7 +143,23 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
     }
 
     @Override
-    public void transferirMesa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void transferirMesa() {                
+        TransferirAMozoJDialog nueva = new TransferirAMozoJDialog(this.controlador);
+        nueva.setVisible(true);
+    }
+
+    @Override
+    public void mostrarListaServicioMesa(Mesa seleccionada) {
+        panelInfo.mostrarServicios(seleccionada);
+    }
+
+    private void cerrarMesa() {
+        controlador.cerrar();
+    }
+
+    @Override
+    public void notificarTransferencia(Mozo mozo, Mozo mozoDestino) {  
+        TransferenciaOkJDialog nuevo = new TransferenciaOkJDialog(this.controlador); ///////////// Este tiene que abrirse solo al Mozo destino
+        nuevo.setVisible(true);
     }
 }

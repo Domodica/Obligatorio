@@ -61,12 +61,26 @@ public class SistemaAtencionCliente {
         }
     }
 
-    public void agregarArticuloAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
-        if (art.getStock() >= cantidad && cantidad > 0) {
-            mesa.getServicio().agregarItem(new Item(art, cantidad, des));
-            System.out.println("    agregadpo");
+    public void agregarItemAlServicio(Integer cantidad, String des, Articulo art, Mesa m) { /////////////////////
+        Item i = new Item(art, cantidad, des);
+        if (m.getAbierta()) {
+            if (art != null) {
+                if (art.getStock() < cantidad) {
+                    System.out.println("sin stock");
+                } else if (cantidad <= 0) {
+                    System.out.println("cantidad Invalida");
+                } else {
+                    m.getServicio().agregarItem(i);
+                    System.out.println("Item agregado a la mesa " + m.getNumero());
+                    art.descontarStock(cantidad);
+                    enviarPedidoAUp(i, m);
+                }
+            } else {
+                System.out.println("Debe seleccionar un artículo de la lista");
+            }
+        } else {
+            System.out.println("Debe abrir la mesa");
         }
-        
     }
 
     public ArrayList<Articulo> getArticulosDisponibles() {
@@ -77,6 +91,22 @@ public class SistemaAtencionCliente {
             }
         }
         return ret;
+    }
+
+    public void enviarPedidoAUp(Item i, Mesa m) { /////////////////*******************///////////////
+        Pedido p = new Pedido(i, m);
+        UnidadProcesadora upPedido = i.getArt().getUp();
+        upPedido.agregarPedidoPendiente(p);
+    }
+
+    public ArrayList<Mozo> getMozosLogueados(Mozo miMozo) {
+        ArrayList<Mozo> mozosLog = new ArrayList<Mozo>();
+        for (Mozo m : getMozos()) {
+            if (m.getLogueado() && !m.equals(miMozo)) {
+                mozosLog.add(m);
+            }
+        }
+        return mozosLog;
     }
 
 }

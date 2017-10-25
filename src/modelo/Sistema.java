@@ -22,11 +22,15 @@ public class Sistema {
         return instancia;
     }
 
+    public ArrayList<Mozo> getMozosLogueados(Mozo miMozo) {
+        return sa.getMozosLogueados(miMozo);
+    }
+
     private Sistema() {
     }
 
-    public void agregarArticuloAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
-        sa.agregarArticuloAlServicio(cantidad, des, art, mesa);
+    public void agregarItemAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
+        sa.agregarItemAlServicio(cantidad, des, art, mesa);
     }
 
     public Mozo loginMozo(String n, String p) {
@@ -52,8 +56,8 @@ public class Sistema {
     public void asignarUPaGestor(Gestor g, UnidadProcesadora up) {
         spp.asignarUPaGestor(g, up);
     }
-       
-    public void agregarMesa(String nombreMozo, Boolean libre, Integer numero){ ///////////////////////////
+
+    public void agregarMesa(String nombreMozo, Boolean libre, Integer numero) { ////////////*********************
         sa.agregarMesa(nombreMozo, libre, numero);
     }
 
@@ -76,7 +80,27 @@ public class Sistema {
     public ArrayList<UnidadProcesadora> getUnidadesProcesadoras() {
         return spp.getUnidadesProcesadoras();
     }
-    
-  
+
+    public Articulo buscarArticuloPorNombre(String nombre) { //////////////////////////
+        for (Articulo art : getArticulosDisponibles()) {
+            if (art.getNombre().equals(nombre)) {
+                return art;
+            }
+        }
+        return null;
+    }
+
+    public boolean evaluarPedidosPendientesMesa(Mesa mesa) { ////// Mesa.tienePedidosPendientes
+        for (UnidadProcesadora up: spp.getUnidadesProcesadoras()){
+            for (Pedido p: up.getPendientes()){
+                if(p.getMesa()==mesa){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+ 
 
 }

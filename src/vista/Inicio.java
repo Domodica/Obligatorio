@@ -24,6 +24,7 @@ public class Inicio {
     public static void main(String[] args) {
         // TODO code application logic here
         new InicioAppJDialog().setVisible(true);
+        new InicioAppJDialog().setVisible(true);
         
         cargarDatos();
     }
@@ -31,7 +32,7 @@ public class Inicio {
     private static void cargarDatos() {
         
         Sistema logica = Sistema.getInstancia();
-        logica.agregar(new Mozo("m m", "m", "m", false));
+        logica.agregar(new Mozo("mozo mozo", "m", "m", false));
         logica.agregar(new Mozo("Juan Perez", "Juan", "moon", false));
         logica.agregar(new Mozo("Ana Lopez", "Ana", "moon", false));
         logica.agregar(new Gestor("Pepe", "Pepe", "moon", false));

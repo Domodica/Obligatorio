@@ -13,10 +13,10 @@ import modelo.Articulo;
  *
  * @author simonlg
  */
-public class AgregarItemJDialog extends javax.swing.JDialog{
-    
+public class AgregarItemJDialog extends javax.swing.JDialog {
+
     private ControladorMozo controlador;
-    
+
     public AgregarItemJDialog(ControladorMozo pControlador) {
         initComponents();
         setModal(true);
@@ -43,6 +43,7 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
         jLabel3 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
+        okSolicitud = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -50,7 +51,7 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
         jScrollPane1.setViewportView(listaArticulos);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 50, 390, 170);
+        jScrollPane1.setBounds(20, 50, 580, 130);
 
         jLabel1.setText("ARTICULOS DISPONIBLES");
         getContentPane().add(jLabel1);
@@ -61,15 +62,15 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
         jScrollPane2.setViewportView(txtDescripcion);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(90, 290, 320, 110);
+        jScrollPane2.setBounds(110, 240, 320, 90);
 
         jLabel2.setText("Descripcion:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 290, 100, 30);
+        jLabel2.setBounds(20, 240, 100, 30);
 
         jLabel3.setText("Cantidad:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 240, 70, 30);
+        jLabel3.setBounds(20, 200, 70, 30);
 
         txtCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +78,7 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
             }
         });
         getContentPane().add(txtCantidad);
-        txtCantidad.setBounds(90, 240, 140, 30);
+        txtCantidad.setBounds(110, 200, 140, 30);
 
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -86,9 +87,18 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
             }
         });
         getContentPane().add(btnEnviar);
-        btnEnviar.setBounds(290, 420, 120, 40);
+        btnEnviar.setBounds(470, 240, 120, 40);
 
-        setBounds(0, 0, 453, 508);
+        okSolicitud.setText("OK solicitud");
+        okSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okSolicitudActionPerformed(evt);
+            }
+        });
+        getContentPane().add(okSolicitud);
+        okSolicitud.setBounds(470, 290, 120, 40);
+
+        setBounds(0, 0, 668, 392);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
@@ -96,8 +106,12 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        agregarItemAlServicio();
+        agregarItemAlServicio();       
     }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void okSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okSolicitudActionPerformed
+       dispose();
+    }//GEN-LAST:event_okSolicitudActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,21 +125,24 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList listaArticulos;
+    private javax.swing.JButton okSolicitud;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextArea txtDescripcion;
     // End of variables declaration//GEN-END:variables
 
+    private void agregarItemAlServicio() {
+        Integer cantidad = Integer.parseInt(txtCantidad.getText()); //////////// Pendiente verificar que sea numerico
+        String des = txtDescripcion.getText();       
+        Articulo art = (Articulo)listaArticulos.getSelectedValue();   
+        controlador.getFachada().agregarItemAlServicio(cantidad, des, art, controlador.getSeleccionada());  //////////////DIF CON GABY
+        mostarListaArticulos(); 
+        
+    }
 
-    private void agregarItemAlServicio(){
-        Integer cantidad = Integer.parseInt(txtCantidad.getText());
-        String des = txtDescripcion.getText();
-        System.out.println(""+ listaArticulos.getSelectedValue());
-        controlador.getFachada().agregarArticuloAlServicio(cantidad, des, (Articulo)listaArticulos.getSelectedValue(), controlador.getSeleccionada());    
+    private void mostarListaArticulos() {
+        this.listaArticulos.removeAll();
+        ArrayList<Articulo> a = controlador.articulosDisponibles();
+        this.listaArticulos.setListData(controlador.articulosDisponibles().toArray());
     }
     
-    private void mostarListaArticulos() {
-       this.listaArticulos.removeAll();
-       ArrayList<Articulo> a = controlador.articulosDisponibles();      
-       this.listaArticulos.setListData(controlador.articulosDisponibles().toArray());
-    }
 }

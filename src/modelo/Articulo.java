@@ -10,7 +10,7 @@ package modelo;
  * @author simonlg
  */
 public class Articulo {
-    
+
     private Integer codigo;
     private String nombre;
     private Double precio;
@@ -64,10 +64,14 @@ public class Articulo {
         this.stock = stock;
         this.up = up;
     }
-    
+
     @Override
     public String toString(){             
-        return getNombre() + " - Stock: " + getStock();
+        return getNombre() + " - stock: " + getStock(); ////////////////////////////////////////
     }
     
+    public void descontarStock(Integer cantidad) { ////////////////////////////////////////
+        this.stock -= cantidad;
+    }
+
 }
