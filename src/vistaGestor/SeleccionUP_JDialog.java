@@ -8,6 +8,7 @@ package vistaGestor;
 import controlador.ControladorGestor;
 import controlador.VistaGestor;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.Gestor;
 import modelo.UnidadProcesadora;
 
@@ -93,9 +94,10 @@ public class SeleccionUP_JDialog extends javax.swing.JDialog implements VistaGes
     @Override
     public void ingresarPuesto() {
         
-        this.controlador.getGestor().setUp((UnidadProcesadora) listUnidadesP.getSelectedValue());  
+        UnidadProcesadora up = (UnidadProcesadora) listUnidadesP.getSelectedValue();
+        this.controlador.entrarUP(up);
         JFrame f = new JFrame();
-        f.setSize(800, 800);
+        f.setSize(800, 400);
         PanelInicioGestor pi = new PanelInicioGestor(controlador);
         f.setTitle("Bienvenido " + controlador.getGestor().getNombreCompleto());
         f.setContentPane(pi);
@@ -106,5 +108,20 @@ public class SeleccionUP_JDialog extends javax.swing.JDialog implements VistaGes
     @Override
     public void mostrarPedidosPendientes() {
         
+    }
+
+    @Override
+    public void tomarPedido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void finalizarPedido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void error(String mensaje) {
+         JOptionPane.showMessageDialog(this, mensaje, "Error en aplicacion gestor", JOptionPane.ERROR_MESSAGE);
     }
 }

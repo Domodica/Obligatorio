@@ -10,7 +10,6 @@ import modelo.Mozo;
 import modelo.Pedido;
 import modelo.Sistema;
 import modelo.Transferencia;
-import vistaMozo.PanelMesas;
 
 /**
  *
@@ -141,10 +140,11 @@ public class ControladorMozo implements Observer {
     }
 
     public void agregarNuevoItem() {
-        if(mesaSeleccionada != null && mesaSeleccionada.getAbierta())
+        if (mesaSeleccionada != null && mesaSeleccionada.getAbierta()) {
             vista.agregarItem();
-        else
+        } else {
             vista.error("La mesa se encuentra cerrada o no ha seleccionado ninguna");
+        }
     }
 
     public Mesa getSeleccionada() {

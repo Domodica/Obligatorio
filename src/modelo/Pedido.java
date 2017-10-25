@@ -8,17 +8,26 @@ public class Pedido {
 
     private Item item;
     private Mesa mesa;
-
+    private UnidadProcesadora procesadora;
     private Estado estado;
     
     public Pedido(Item item, Mesa mesa) {
         this.item = item;
         this.mesa = mesa;
         this.estado = Estado.PENDIENTE;
+        procesadora = null;
     }
 
     public Item getItem() {
         return item;
+    }
+
+    public UnidadProcesadora getProcesadora() {
+        return procesadora;
+    }
+
+    public void setProcesadora(UnidadProcesadora procesadora) {
+        this.procesadora = procesadora;
     }
 
     public void setItem(Item item) {

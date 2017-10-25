@@ -55,7 +55,7 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
 
         lblMesaSel.setText("Mesa seleccionada:");
         add(lblMesaSel);
-        lblMesaSel.setBounds(30, 20, 170, 40);
+        lblMesaSel.setBounds(20, 10, 170, 40);
 
         abrirMesa.setText("ABRIR MESA");
         abrirMesa.addActionListener(new java.awt.event.ActionListener() {

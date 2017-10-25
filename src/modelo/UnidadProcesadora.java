@@ -16,20 +16,12 @@ public class UnidadProcesadora extends Observable {
 
     private String nombre;
     private ArrayList<Pedido> pendientes;
-    private ArrayList<Pedido> tomados;
-    private ArrayList<Pedido> finalizados;
 
-    public void procesarPedido(Pedido p) {
-
-    }
-
-    ;
 
     public UnidadProcesadora(String nombre) {
         this.nombre = nombre;
         this.pendientes = new ArrayList<>();
-        this.tomados = new ArrayList<>();
-        this.finalizados = new ArrayList<>();
+
     }
 
     public String getNombre() {
@@ -53,25 +45,15 @@ public class UnidadProcesadora extends Observable {
         notifyObservers(eventos);
     }
 
-    public enum eventos {
-        nuevoPedido,pedidoFinalizado,;
+    void removerPendiente(Pedido p) {;
+        pendientes.remove(p);
+        avisar(eventos.pedidoTomado);
     }
 
-//    public ArrayList<Pedido> getTomados() {
-//        return tomados;
-//    }
-//
-//    public void setTomados(ArrayList<Pedido> tomados) {
-//        this.tomados = tomados;
-//    }
-//
-//    public ArrayList<Pedido> getFinalizados() {
-//        return finalizados;
-//    }
-//
-//    public void setFinalizados(ArrayList<Pedido> finalizados) {
-//        this.finalizados = finalizados;
-//    }
+    public enum eventos {
+        nuevoPedido, pedidoFinalizado, pedidoTomado;
+    }
+
     @Override
     public String toString() {
         return this.getNombre();

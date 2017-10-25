@@ -25,6 +25,7 @@ public class Inicio {
         // TODO code application logic here
         new InicioAppJDialog().setVisible(true);
         new InicioAppJDialog().setVisible(true);
+         new InicioAppJDialog().setVisible(true);
         cargarDatos();
     }
     
@@ -32,14 +33,16 @@ public class Inicio {
     private static void cargarDatos() {
 
         Sistema logica = Sistema.getInstancia();
-        Mozo m = new Mozo("m m", "m", "m", false);
+        Mozo m = new Mozo("Manuel", "m", "m", false);
         Mozo j = new Mozo("Juan Perez", "Juan", "moon", false);
         Mozo a = new Mozo("Ana Lopez", "Ana", "moon", false);
         Gestor p = new Gestor("Pepe", "p", "p", false);
+        Gestor o = new Gestor("Oscar", "o", "o", false);
         logica.agregar(m);
         logica.agregar(j);
         logica.agregar(a);
         logica.agregar(p);
+        logica.agregar(o);
         UnidadProcesadora parrilla = new UnidadProcesadora("Parrilla");
         UnidadProcesadora bar = new UnidadProcesadora("Bar");
         UnidadProcesadora cocina = new UnidadProcesadora("Cocina");

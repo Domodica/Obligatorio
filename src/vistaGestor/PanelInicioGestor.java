@@ -7,8 +7,8 @@ package vistaGestor;
 
 import controlador.ControladorGestor;
 import controlador.VistaGestor;
-import modelo.Gestor;
-import modelo.UnidadProcesadora;
+import javax.swing.JOptionPane;
+import modelo.Pedido;
 
 /**
  *
@@ -20,12 +20,13 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
      * Creates new form PanelInicioGestor
      */
     private ControladorGestor controlador;
-    
+
     public PanelInicioGestor(ControladorGestor pControlador) {
         initComponents();
         controlador = pControlador;
         controlador.setVista(this);
         controlador.getGestor().getUp().addObserver(controlador);
+        mostrarPedidosPendientes();
     }
 
     /**
@@ -39,7 +40,8 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
 
         jScrollPane1 = new javax.swing.JScrollPane();
         listPedidosPendientes = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
+        btnTomarPedido = new javax.swing.JButton();
+        btnFinalizarPedido = new javax.swing.JButton();
 
         setLayout(null);
 
@@ -48,37 +50,33 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
         add(jScrollPane1);
         jScrollPane1.setBounds(80, 50, 550, 140);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnTomarPedido.setText("TOMAR PEDIDO");
+        btnTomarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnTomarPedidoActionPerformed(evt);
             }
         });
-        add(jButton1);
-        jButton1.setBounds(300, 300, 73, 23);
+        add(btnTomarPedido);
+        btnTomarPedido.setBounds(160, 230, 150, 50);
+
+        btnFinalizarPedido.setText("FINALIZAR PEDIDO");
+        add(btnFinalizarPedido);
+        btnFinalizarPedido.setBounds(380, 230, 150, 50);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         
-        System.out.println("hola"+controlador.getGestor().getUp().countObservers());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnTomarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTomarPedidoActionPerformed
+        tomarPedido();
+    }//GEN-LAST:event_btnTomarPedidoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnFinalizarPedido;
+    private javax.swing.JButton btnTomarPedido;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList listPedidosPendientes;
     // End of variables declaration//GEN-END:variables
 
     
-    @Override
-    public void mostrarUnidadesProcesadoras() {
-        
-    }
-    
-    @Override
-    public void ingresarPuesto() {
-    }
 
     @Override
     public void mostrarPedidosPendientes() {
@@ -86,6 +84,33 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
         listPedidosPendientes.setListData(controlador.getGestor().getUp().getPendientes().toArray());
         listPedidosPendientes.repaint();
     }
-    
 
+    @Override
+    public void tomarPedido() {
+        if (controlador.getGestor().quedanPendientes()) {
+            Pedido pedido = (Pedido) listPedidosPendientes.getSelectedValue();
+            controlador.tomarPedido(pedido);
+        }else{
+            error("No quedan pedidos pendientes que seleccionar");               
+        }
+    }
+
+    @Override
+    public void finalizarPedido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void error(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error en aplicacion gestor", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void ingresarPuesto() {
+
+    }
+    @Override
+    public void mostrarUnidadesProcesadoras() {
+
+    }
 }

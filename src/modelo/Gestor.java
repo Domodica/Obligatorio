@@ -16,6 +16,15 @@ public class Gestor extends Usuario {
     private UnidadProcesadora up;
     private ArrayList<Pedido> tomados;
     private ArrayList<Pedido> finalizados;
+    
+    
+    public UnidadProcesadora getUp() {
+        return up;
+    }
+    
+    public void setUp(UnidadProcesadora up) {
+        this.up = up;
+    }
 
     public ArrayList<Pedido> getTomados() {
         return tomados;
@@ -32,40 +41,32 @@ public class Gestor extends Usuario {
     public void setFinalizados(ArrayList<Pedido> finalizados) {
         this.finalizados = finalizados;
     }
-    
-    
-    
-    
-    
-    
-    
-    public UnidadProcesadora getUp() {
-        return up;
-    }
-    public void setUp(UnidadProcesadora up) {
-        this.up = up;
-    }
 
+    
+    
+    
     public Gestor(String nombreCompleto, String nombre, String password, Boolean logueado) {
         super(nombreCompleto, nombre, password, logueado);
-        this.finalizados = new ArrayList<>();
-        this.tomados = new ArrayList<>();
+        tomados = new ArrayList<>();
+        finalizados = new ArrayList<>();
+    }
 
+    
+    public void agregarPedidoTomado (Pedido p){
+        tomados.add(p);
+        p.cambiarEstadoATomado();
+        up.removerPendiente(p);
     }
     
+  
+
+    public boolean quedanPendientes(){
+        return (up.getPendientes().size()>0);
+    }
     
-//        public void agregarPedidoPendiente (Pedido p){
-//        this.pendientes.add(p);
-//        System.out.println("Pedido pendiente agregado.");
-//    }
-//    
-//    public void agregarPedidoTomado (Pedido p){
-//        this.tomados.add(p);
-//    }
-//    
-//    public void agregarPedidoFinalizado (Pedido p){
-//        this.finalizados.add(p);
-//    }
+    public void entrarEnServicio(UnidadProcesadora up) {
+        this.setUp(up);
+    }
     
 
 }

@@ -8,7 +8,7 @@ package controlador;
 import java.util.Observable;
 import java.util.Observer;
 import modelo.Gestor;
-import modelo.Mozo;
+import modelo.Pedido;
 import modelo.Sistema;
 import modelo.UnidadProcesadora;
 
@@ -49,16 +49,22 @@ public class ControladorGestor implements Observer{
      
     @Override
     public void update(Observable origen, Object evento) {
-        if(evento.equals(UnidadProcesadora.eventos.nuevoPedido)){
+        if(evento.equals(UnidadProcesadora.eventos.nuevoPedido) || evento.equals(UnidadProcesadora.eventos.pedidoTomado)){
             cargarPedidosPendientes();
         }
-//        if(evento.equals(Contador.eventos.maximo)){
-//            vista.maximo(modelo.getValor());
-//        }
     }
 
     private void cargarPedidosPendientes() {
         vista.mostrarPedidosPendientes();
+    }
+    
+    public void entrarUP(UnidadProcesadora up){
+        gestor.entrarEnServicio(up);
+    }
+
+    
+    public void tomarPedido(Pedido pedido) {
+        gestor.agregarPedidoTomado(pedido);
     }
     
     

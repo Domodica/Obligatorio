@@ -143,26 +143,21 @@ public class InfoMesaPanel extends JPanel {
         String[] datos = new String[6];
         double total = 0;
 
-        ArrayList<Item> listaItems = new ArrayList<Item>();
-        listaItems = seleccionada.getServicio().getItems();
-        
-        if (listaItems.size() > 0) {      
-
+        ArrayList<Item> listaItems = seleccionada.getServicio().getItems();
             for (Item i : listaItems) {
                 datos[0] = i.getArt().getNombre();
                 datos[1] = i.getCantidad() + "";
                 datos[2] = i.getArt().getPrecio() + "";
                 datos[3] = (i.getCantidad()) * (i.getArt().getPrecio()) + "";
-                datos[4] = " -- FALTA IMPLEMENTAR -- "; //modelo.addColumn("Estado");
+                datos[4] = i.getPedido().getEstado().toString();
+                i.
                 datos[5] = " -- FALTA IMPLEMENTAR --";  //modelo.addColumn("Gestor");  
                 ////////////////////////Para poder hacer estos vamos a tener que hacer esto desde la Up cuando el pedido este agregado ahi
                 modelo.addRow(datos);
-                
-                total += (double)(i.getCantidad()) * (i.getArt().getPrecio());                              
+
+                total += (double) (i.getCantidad()) * (i.getArt().getPrecio());
             }
-        } else {
-            System.out.println("No hay items en el servicio de la mesa " + seleccionada.getNumero());
-        }
+
         txtTotal.setText("Total: " + total);
     }
 
