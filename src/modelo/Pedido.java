@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 /**
@@ -10,20 +5,18 @@ package modelo;
  * @author simonlg
  */
 public class Pedido {
+
     private Item item;
     private Mesa mesa;
-    private enum Estado{
-        PENDIENTE, PROCESANDO, TERMINADO;
-    }
-    private Estado estado;
 
+    private Estado estado;
+    
     public Pedido(Item item, Mesa mesa) {
         this.item = item;
         this.mesa = mesa;
         this.estado = Estado.PENDIENTE;
     }
-    
-   
+
     public Item getItem() {
         return item;
     }
@@ -48,8 +41,19 @@ public class Pedido {
         this.estado = estado;
     }
 
+    public void cambiarEstadoATomado() {
+        if (this.estado.equals(estado.PENDIENTE)) {
+            this.estado = Estado.PROCESANDO;
+        }
+    }
+        public void cambiarEstadoAFinalizado() {
+        if (this.estado.equals(estado.PROCESANDO)) {
+            this.estado = Estado.TERMINADO;
+        }
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         return item.getArt().getNombre() + " cantidad: " + item.getCantidad() + " " + item.getDescripcion() + " Mesa:  " + mesa.getNumero() + " " + mesa.getMozo().getNombreCompleto();
     }
 }

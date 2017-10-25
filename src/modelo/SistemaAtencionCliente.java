@@ -19,12 +19,15 @@ public class SistemaAtencionCliente {
     public ArrayList<Mozo> getMozos() {
         return mozos;
     }
+
     public void setMozos(ArrayList<Mozo> mozos) {
         this.mozos = mozos;
     }
+
     public ArrayList<Articulo> getArticulos() {
         return articulos;
     }
+
     public void setArticulos(ArrayList<Articulo> articulos) {
         this.articulos = articulos;
     }
@@ -47,25 +50,43 @@ public class SistemaAtencionCliente {
         return null;
     }
 
-//    public void agregarMesa(String nombreMozo, Boolean libre, Integer numero, Mozo mozo) {
-//
-//        for (Mozo m : mozos) {
-//            if (m.getNombre().equals(nombreMozo)) {
-//
-//                Mesa nuevaMesa = new Mesa(libre, numero, mozo);
-//                m.agregarMesa(nuevaMesa);
-//            }
-//        }
-//    }
-
-    public void agregarArticuloAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
-        if (art.getStock() >= cantidad && cantidad > 0) {
-            mesa.getServicio().agregarItem(new Item(art, cantidad, des));
-            System.out.println("    agregado");
+    public boolean agregarNuevoItemPedido(Mesa mesa, Item item) {
+        //la mesa esta abierta, hace falta verificar aca otra vez?? cuando es mucho hablando de verificar?
+        boolean agregado = false;
+        if (item.getArt().getStock() >= item.getCantidad()) {
+            mesa.agregarItemServicio(item);
+            item.getArt().descontarStock(item.getCantidad());
+            agregado = true;
         }
-        
+        return agregado;
     }
 
+//    public void agregarItemAlServicio(Integer cantidad, String des, Articulo art, Mesa m) {
+//        Item i = new Item(art, cantidad, des);
+//        if (m.getAbierta()) {
+//            if (art != null) {
+//                if (art.getStock() < cantidad) {
+//                    System.out.println("sin stock");
+//                } else if (cantidad <= 0) {
+//                    System.out.println("cantidad Invalida");
+//                } else {
+//                    m.getServicio().agregarItem(i);
+//                    System.out.println("Item agregado a la mesa " + m.getNumero());
+//                    art.descontarStock(cantidad);
+//                    enviarPedidoAUp(i, m);
+//                }
+//            } else {
+//                System.out.println("Debe seleccionar un artículo de la lista");
+//            }
+//        } else {
+//            System.out.println("Debe abrir la mesa");
+//        }
+//
+////        if (art.getStock() >= cantidad && cantidad > 0) {
+////            mesa.getServicio().agregarItem(new Item(art, cantidad, des));
+////            System.out.println("    agregado");
+////        }
+//    }
     public ArrayList<Articulo> getArticulosDisponibles() {
         ArrayList<Articulo> ret = new ArrayList<>();
         for (Articulo art : articulos) {
@@ -74,6 +95,12 @@ public class SistemaAtencionCliente {
             }
         }
         return ret;
+    }
+
+    public void enviarPedidoAUp(Item i, Mesa m) { ////////////////////////////////
+//        Pedido p = new Pedido(i, m);
+//        UnidadProcesadora upPedido = i.getArt().getUp();
+//        upPedido.agregarPedidoPendiente(p);
     }
 
 }

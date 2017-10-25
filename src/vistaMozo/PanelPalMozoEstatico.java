@@ -10,7 +10,7 @@ import controlador.VistaMozo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import modelo.Item;
+import javax.swing.JOptionPane;
 import modelo.Mesa;
 import modelo.Mozo;
 
@@ -45,16 +45,16 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mesaSel = new javax.swing.JLabel();
+        lblMesaSel = new javax.swing.JLabel();
         abrirMesa = new javax.swing.JButton();
         btnSalirSistema = new javax.swing.JButton();
         verServicio = new javax.swing.JButton();
 
         setLayout(null);
 
-        mesaSel.setText("Mesa seleccionada:");
-        add(mesaSel);
-        mesaSel.setBounds(30, 20, 170, 40);
+        lblMesaSel.setText("Mesa seleccionada:");
+        add(lblMesaSel);
+        lblMesaSel.setBounds(30, 20, 170, 40);
 
         abrirMesa.setText("ABRIR MESA");
         abrirMesa.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +67,7 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
 
         btnSalirSistema.setText("SALIR del sistema");
         add(btnSalirSistema);
-        btnSalirSistema.setBounds(450, 10, 80, 30);
+        btnSalirSistema.setBounds(450, 10, 130, 30);
 
         verServicio.setText("VER SERVICIO");
         verServicio.addActionListener(new java.awt.event.ActionListener() {
@@ -80,34 +80,41 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirMesaActionPerformed
-        // TODO add your handling code here:
-        controlador.abrir();
+        abrirMesa();
     }//GEN-LAST:event_abrirMesaActionPerformed
 
     private void verServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verServicioActionPerformed
-//        controlador.verServicio();
+        verServicio();
     }//GEN-LAST:event_verServicioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirMesa;
     private javax.swing.JButton btnSalirSistema;
-    private javax.swing.JLabel mesaSel;
+    private javax.swing.JLabel lblMesaSel;
     private javax.swing.JButton verServicio;
     // End of variables declaration//GEN-END:variables
 
+    public void abrirMesa() {
+        controlador.abrir();
+    }
+
+    public void cerrarMesa() {
+        controlador.cerrar();
+    }
+
+    /*este merenjunje de aca me suena raro*/
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "AGREGAR ITEM":
-                agregarItem();
+                agregarNuevoItem();
                 break;
             case "TRANSFERIR MESA":
-                System.out.println("    transferir");
-                controlador.getFachada().getLogeados();
+                transferirMesa();
                 break;
             case "CERRAR MESA":
-                System.out.println("    cerrar");
+                cerrarMesa();
                 break;
             default:
                 BotonMesa b = (BotonMesa) e.getSource();
@@ -116,10 +123,10 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
         }
 
     }
-
+ /*no me quedo claro si todo lo que hace el controlador tiene que estar en la interface vista*/
     @Override
     public void mostrarNumeroMesaSeleccionada(int numero) {
-        mesaSel.setText("Mesa seleccionada: " + numero);
+        lblMesaSel.setText("Mesa seleccionada: " + numero);
     }
 
     @Override
@@ -135,6 +142,39 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
 
     @Override
     public void transferirMesa() {
-        controlador.getFachada().getLogeados();
+        TransferirAMozoJDialog nueva = new TransferirAMozoJDialog(this.controlador);
+        nueva.setVisible(true);
     }
+
+    @Override
+    public void verServicioMesa(Mesa seleccionada) {
+        panelInfo.mostrarServicios(seleccionada);
+    }
+
+    @Override
+    public void notificarTransferencia(Mozo mozo, Mozo mozoDestino, Mesa seleccionada) {
+        System.out.println("//// QUEDE ACA!!! "
+                + "ABRIR JDIALOG SOLO AL MOZO DESTINO " + mozoDestino + " notificando que la inicio el mozo " + mozo
+                + ", nro de mesa " + seleccionada.getNumero() + ", abierta?: " + seleccionada.getAbierta());
+
+    }
+
+    @Override
+    public void error(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error en aplicacion mozo", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void verServicio() {
+        controlador.verServicio();
+    }
+
+    private void agregarNuevoItem() {
+        controlador.agregarNuevoItem();
+    }
+
+    @Override
+    public void mostarListaArticulos() {
+        
+    }
+
 }

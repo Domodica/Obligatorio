@@ -38,6 +38,7 @@ public class Gestor extends Usuario {
     
     
     
+    
     public UnidadProcesadora getUp() {
         return up;
     }
@@ -51,5 +52,20 @@ public class Gestor extends Usuario {
         this.tomados = new ArrayList<>();
 
     }
+    
+    
+//        public void agregarPedidoPendiente (Pedido p){
+//        this.pendientes.add(p);
+//        System.out.println("Pedido pendiente agregado.");
+//    }
+//    
+//    public void agregarPedidoTomado (Pedido p){
+//        this.tomados.add(p);
+//    }
+//    
+//    public void agregarPedidoFinalizado (Pedido p){
+//        this.finalizados.add(p);
+//    }
+    
 
 }

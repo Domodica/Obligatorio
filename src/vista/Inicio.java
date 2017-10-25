@@ -5,7 +5,6 @@
  */
 package vista;
 
-import java.util.ArrayList;
 import modelo.Articulo;
 import modelo.Gestor;
 import modelo.Mesa;
@@ -28,6 +27,7 @@ public class Inicio {
         new InicioAppJDialog().setVisible(true);
         cargarDatos();
     }
+    
 
     private static void cargarDatos() {
 

@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 
 
 public class Mesa {
@@ -13,9 +15,19 @@ public class Mesa {
     private Integer numero;
     private Servicio servicio;
     private Mozo mozo;
-
+    private ArrayList<Pedido> pedidos;
+    //la mesa deberia tener una lista de sus pedidos, al iniciar el servicio se le hace new
+    
     public Mozo getMozo() {
         return mozo;
+    }
+
+    public ArrayList<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(ArrayList<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
     public void setMozo(Mozo mozo) {
         this.mozo = mozo;
@@ -47,11 +59,33 @@ public class Mesa {
     }
     
     public void agregarItemServicio(Item item){
-        if(servicio != null)
+        if(servicio != null && pedidos != null){
             servicio.agregarItem(item);
+            pedidos.add(new Pedido(item, this));
+        }
     }
     
+    public boolean tieneServicioPendiente(){
+        boolean pendiente = false;
+        for (Pedido p : pedidos){
+            if(!p.getEstado().equals(Estado.TERMINADO))
+                pendiente = true;
+        }
+        return pendiente;
+    }
+   
+    void abrir() {
+        abierta = true;
+        servicio = new Servicio();
+        pedidos = new ArrayList<>();
+        
+    }
 
+    void cerrar() {
+        abierta = false;
+        servicio = null;
+        pedidos = null;
+    }
 
 }
 

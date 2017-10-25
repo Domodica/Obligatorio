@@ -13,10 +13,10 @@ import modelo.Articulo;
  *
  * @author simonlg
  */
-public class AgregarItemJDialog extends javax.swing.JDialog{
-    
+public class AgregarItemJDialog extends javax.swing.JDialog {
+
     private ControladorMozo controlador;
-    
+
     public AgregarItemJDialog(ControladorMozo pControlador) {
         initComponents();
         setModal(true);
@@ -91,13 +91,13 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
         setBounds(0, 0, 453, 508);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadActionPerformed
-
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         agregarItemAlServicio();
     }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,16 +115,21 @@ public class AgregarItemJDialog extends javax.swing.JDialog{
     private javax.swing.JTextArea txtDescripcion;
     // End of variables declaration//GEN-END:variables
 
-
-    private void agregarItemAlServicio(){
-        Integer cantidad = Integer.parseInt(txtCantidad.getText());
-        String des = txtDescripcion.getText();
-        controlador.agregarItemAlServicio((Articulo)listaArticulos.getSelectedValue(),cantidad,des);    
+    private void agregarItemAlServicio() {
+        try {
+            Integer cantidad = Integer.parseInt(txtCantidad.getText());
+            String des = txtDescripcion.getText();
+            Articulo art = (Articulo) listaArticulos.getSelectedValue();
+            controlador.agregarItemAlServicio(art, cantidad, des);
+            mostarListaArticulos();
+        } catch (Exception e) {
+            controlador.errorDatosItem();
+        }
     }
     
     private void mostarListaArticulos() {
-       this.listaArticulos.removeAll();
-       ArrayList<Articulo> a = controlador.articulosDisponibles();      
-       this.listaArticulos.setListData(controlador.articulosDisponibles().toArray());
+        this.listaArticulos.removeAll();
+        ArrayList<Articulo> a = controlador.articulosDisponibles();
+        this.listaArticulos.setListData(controlador.articulosDisponibles().toArray());
     }
 }

@@ -25,23 +25,11 @@ public class Sistema {
     private Sistema() {
     }
 
-    public void agregarArticuloAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
-        sa.agregarArticuloAlServicio(cantidad, des, art, mesa);
-        
-    }
+//    public void agregarItemAlServicio(Integer cantidad, String des, Articulo art, Mesa mesa) {
+//        sa.agregarItemAlServicio(cantidad, des, art, mesa);
+//        
+//    }
     
-    public void getLogeados(){
-        for(Mozo m : sa.getMozos()){
-            if(m.getLogueado())
-                System.out.println(m.getNombre() + " logeado  ----");
-        }
-        for(Gestor g : spp.getGestores()){
-            if(g.getLogueado())
-                System.out.println(g.getNombre() + " logeado  ----");
-        }
-        
-    }
-
     public Mozo loginMozo(String n, String p) {
         return sa.login(n, p);
     }
@@ -93,7 +81,17 @@ public class Sistema {
     public void agregarPedidoPendiente(Pedido pedido) {
         spp.agregarPedidoPendiente(pedido);
     }
-    
-  
+    public Articulo buscarArticuloPorNombre(String nombre) { //////////////////////////
+        for (Articulo art : getArticulosDisponibles()) {
+            if (art.getNombre().equals(nombre)) {
+                return art;
+            }
+        }
+        return null;
+    }
+
+    public boolean agregarItemServicio(Mesa mesa, Item item) {
+        return sa.agregarNuevoItemPedido(mesa,item);
+    }
 
 }

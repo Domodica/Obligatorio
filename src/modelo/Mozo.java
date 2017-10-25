@@ -19,16 +19,19 @@ public class Mozo extends Usuario {
     public ArrayList<Mesa> getListaMesas() {
         return listaMesas;
     }
+
     public void setListaMesas(ArrayList<Mesa> listaMesas) {
         this.listaMesas = listaMesas;
     }
+
     public Transferencia getTransferencia() {
         return transferencia;
     }
+
     public void setTransferencia(Transferencia transferencia) {
         this.transferencia = transferencia;
     }
-    
+
     public Mozo(String nombreCompleto, String nombre, String password, Boolean logueado) {
         super(nombreCompleto, nombre, password, logueado);
         this.listaMesas = new ArrayList<>();
@@ -38,13 +41,60 @@ public class Mozo extends Usuario {
         this.listaMesas.add(m);
     }
 
-    public void avisar(eventos eventos) { //esto deberia ser privado o protectes, entonces el item y el pedido se cren en el mozo?
+    public void borrarMesa(Mesa m) {
+        this.listaMesas.remove(m);
+    }
+
+    public void avisar(eventos eventos) { 
         setChanged();
         notifyObservers(eventos);
     }
 
     public enum eventos {
-        agregarArticulo;
+        agregarArticulo, transferencia;
     }
 
+    public boolean tieneMesasAbiertas() {
+        for (Mesa m : getListaMesas()) {
+            if (m.getAbierta()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void solicitarTransferencia(Mozo mDestino, Mesa seleccionada) {
+        System.out.println("mozo origen: " + this.getNombreCompleto());
+        System.out.println("mozo destino: " + mDestino.getNombreCompleto());
+        Transferencia t = new Transferencia(mDestino, seleccionada); //////////// La creo??
+        this.transferencia = t;
+        avisar(eventos.transferencia);
+    }
+
+    public boolean tieneTransferenciaPendiente() {
+        return getTransferencia() == null;
+    }
+
+    public boolean abrirMesa(Mesa seleccionada) {
+        if (seleccionada != null && !seleccionada.getAbierta()) {
+            seleccionada.abrir();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean cerrarMesa(Mesa seleccionada) {
+        if (seleccionada != null && seleccionada.getAbierta() && !seleccionada.tieneServicioPendiente()) {
+            seleccionada.cerrar();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.getNombreCompleto();
+    }
 }

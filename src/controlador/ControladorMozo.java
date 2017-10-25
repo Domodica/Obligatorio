@@ -8,40 +8,45 @@ import modelo.Item;
 import modelo.Mesa;
 import modelo.Mozo;
 import modelo.Pedido;
-import modelo.Servicio;
 import modelo.Sistema;
 
 /**
  *
  * @author simonlg
  */
-public class ControladorMozo implements Observer{ 
+public class ControladorMozo implements Observer {
 
-    private Mesa seleccionada;
+    private Sistema fachada = Sistema.getInstancia();
+    private Mesa mesaSeleccionada;
     private VistaMozo vista;
     private Mozo mozo;
-    private Sistema fachada = Sistema.getInstancia();
     private Item item;
     private Pedido pedido;
 
-    public Mesa getSeleccionada() {
-        return seleccionada;
+    public Mesa getMesaSeleccionada() {
+        return mesaSeleccionada;
     }
-    public void setSeleccionada(Mesa seleccionada) {
-        this.seleccionada = seleccionada;
+
+    public void setMesaSeleccionada(Mesa seleccionada) {
+        this.mesaSeleccionada = seleccionada;
     }
+
     public Mozo getMozo() {
         return mozo;
     }
+
     public void setMozo(Mozo mozo) {
         this.mozo = mozo;
     }
+
     public Sistema getFachada() {
         return fachada;
     }
+
     public Item getItem() {
         return item;
     }
+
     public void setItem(Item item) {
         this.item = item;
     }
@@ -54,43 +59,86 @@ public class ControladorMozo implements Observer{
     }
 
     public void seleccionar(Mesa m) {
-        seleccionada = m;
+        mesaSeleccionada = m;
         vista.mostrarNumeroMesaSeleccionada(m.getNumero());
     }
-    
-//  public void verServicio() {
-//        if(seleccionada.getAbierta())
-//            new ServicioMesa(seleccionada).setVisible(true);
-//    }
-  
-    public void abrir() {
-        if (seleccionada != null && !seleccionada.getAbierta()) {
-            seleccionada.setAbierta(true);
-            seleccionada.setServicio(new Servicio());
-            vista.mostrarMesas(mozo.getListaMesas());
+
+    public void verServicio() {
+        if (mesaSeleccionada != null && mesaSeleccionada.getAbierta()) {
+            vista.verServicioMesa(mesaSeleccionada);
+        } else {
+            vista.error("La mesa seleccionada esta cerrada o no a seleccionado ninguna");
         }
     }
-    
-    public ArrayList<Articulo> articulosDisponibles(){
+
+    public void abrir() {
+        if (mesaSeleccionada != null) {
+            if (mozo.abrirMesa(mesaSeleccionada)) {
+                vista.mostrarMesas(mozo.getListaMesas());
+            } else {
+                vista.error("La mesa ya se encuentra abierta");
+            }
+        } else {
+            vista.error("No hay mesa seleccionada");
+        }
+    }
+
+    public void cerrar() {
+        if (mesaSeleccionada != null) {
+            if (mozo.cerrarMesa(mesaSeleccionada)) {
+                vista.mostrarMesas(mozo.getListaMesas());
+            } else {
+                vista.error("La mesa ya se encuentra cerrada o tiene pedidos pendientes");
+            }
+        } else {
+            vista.error("No hay mesa seleccionada");
+        }
+    }
+
+    public ArrayList<Articulo> articulosDisponibles() {
         return fachada.getArticulosDisponibles();
     }
 
-    
-    
     @Override
-    public void update(Observable origen, Object evento) { 
-         if(evento.equals(Mozo.eventos.agregarArticulo)){
-             System.out.println(" entro controlador mozo  ");
+    public void update(Observable origen, Object evento) {
+        if (evento.equals(Mozo.eventos.transferencia)) {
+            notificarMozoDestino();
         }
     }
+
     public void agregarItemAlServicio(Articulo articulo, Integer cantidad, String des) {
-       //new en el controlador, pueden ir?
-        item = new Item(articulo,cantidad,des);
-        pedido = new Pedido(item, seleccionada);
-        this.seleccionada.agregarItemServicio(item);
-        fachada.agregarPedidoPendiente(pedido);
-        mozo.avisar(Mozo.eventos.agregarArticulo);
+        if (mesaSeleccionada.getAbierta()) {
+            item = new Item(articulo, cantidad, des);
+            if (fachada.agregarItemServicio(mesaSeleccionada, item)) {
+                pedido = new Pedido(item, mesaSeleccionada);
+                fachada.agregarPedidoPendiente(pedido);
+                vista.mostarListaArticulos();
+            } else {
+                vista.error("No hay stock suficiente para ese pedido");
+            }
+        } else {
+            vista.error("La mesa seleccionada debe estar abierta.");
+        }
+
     }
 
+    public void tranferirMesa() {
+        mozo.solicitarTransferencia(mozo, mesaSeleccionada);
+    }
 
+    private void notificarMozoDestino() {
+        vista.notificarTransferencia(this.getMozo(), this.getMozo().getTransferencia().getMozoDestino(), this.getMesaSeleccionada());
+
+    }
+
+    public void errorDatosItem() {
+        vista.error("La cantidad ingresada debe ser un numero entero.");
+    }
+
+    public void agregarNuevoItem() {
+        if(mesaSeleccionada != null && mesaSeleccionada.getAbierta())
+            vista.agregarItem();
+        else
+            vista.error("La mesa se encuentra cerrada o no ha seleccionado ninguna");
+    }
 }
