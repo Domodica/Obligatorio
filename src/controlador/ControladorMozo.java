@@ -70,8 +70,9 @@ public class ControladorMozo implements Observer {
     public void verServicio() {
         if (mesaSeleccionada != null && mesaSeleccionada.getAbierta()) {
             vista.verServicioMesa(mesaSeleccionada);
-        } else {
-            vista.error("La mesa seleccionada esta cerrada o no a seleccionado ninguna");
+        } 
+        else {
+            vista.limpiarTablas();
         }
     }
 
@@ -107,13 +108,16 @@ public class ControladorMozo implements Observer {
     public void update(Observable origen, Object evento) {
         if (evento.equals(Mozo.eventos.transferencia)) {
             notificarMozoDestino();
+        } else if (evento.equals(Mozo.eventos.pedidoProcesado)) {
+            this.vista.actualizarServicios();
         }
+
     }
 
     public void agregarItemAlServicio(Articulo articulo, Integer cantidad, String des) {
         if (mesaSeleccionada.getAbierta()) {
             item = new Item(articulo, cantidad, des);
-            if (fachada.agregarItemServicio(mesaSeleccionada, item)) {
+            if (fachada.agregarNuevoItemPedido(mesaSeleccionada, item)) {
                 pedido = new Pedido(item, mesaSeleccionada);
                 fachada.agregarPedidoPendiente(pedido);
                 vista.mostarListaArticulos();

@@ -49,7 +49,6 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
         lblMesaSel = new javax.swing.JLabel();
         abrirMesa = new javax.swing.JButton();
         btnSalirSistema = new javax.swing.JButton();
-        verServicio = new javax.swing.JButton();
 
         setLayout(null);
 
@@ -74,24 +73,11 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
         });
         add(btnSalirSistema);
         btnSalirSistema.setBounds(450, 10, 130, 30);
-
-        verServicio.setText("VER SERVICIO");
-        verServicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verServicioActionPerformed(evt);
-            }
-        });
-        add(verServicio);
-        verServicio.setBounds(70, 130, 120, 40);
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirMesaActionPerformed
         abrirMesa();
     }//GEN-LAST:event_abrirMesaActionPerformed
-
-    private void verServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verServicioActionPerformed
-        verServicio();
-    }//GEN-LAST:event_verServicioActionPerformed
 
     private void btnSalirSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirSistemaActionPerformed
 
@@ -102,7 +88,6 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
     private javax.swing.JButton abrirMesa;
     private javax.swing.JButton btnSalirSistema;
     private javax.swing.JLabel lblMesaSel;
-    private javax.swing.JButton verServicio;
     // End of variables declaration//GEN-END:variables
 
     public void abrirMesa() {
@@ -129,6 +114,7 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
             default:
                 BotonMesa b = (BotonMesa) e.getSource();
                 controlador.seleccionar(b.getMesa());
+                controlador.verServicio();
                 break;
         }
     }
@@ -195,6 +181,16 @@ public class PanelPalMozoEstatico extends javax.swing.JPanel implements ActionLi
     public void notificarTransferencia(Mozo mozo, Mozo mozoDestino) {
        TransferenciaOkJDialog nuevo = new TransferenciaOkJDialog(this.controlador); ///////////// Este tiene que abrirse solo al Mozo destino
         nuevo.setVisible(true);
+    }
+
+    @Override
+    public void actualizarServicios() {
+       verServicio();
+    }
+
+    @Override
+    public void limpiarTablas() {
+        panelInfo.limpiarTabla();
     }
 
 }

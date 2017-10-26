@@ -34,8 +34,8 @@ public class Inicio {
 
         Sistema logica = Sistema.getInstancia();
         Mozo m = new Mozo("Manuel", "m", "m", false);
-        Mozo j = new Mozo("Juan Perez", "Juan", "moon", false);
-        Mozo a = new Mozo("Ana Lopez", "Ana", "moon", false);
+        Mozo j = new Mozo("Juan Perez", "j", "j", false);
+        Mozo a = new Mozo("Ana Lopez", "a", "a", false);
         Gestor p = new Gestor("Pepe", "p", "p", false);
         Gestor o = new Gestor("Oscar", "o", "o", false);
         logica.agregar(m);

@@ -85,17 +85,26 @@ public class Sistema {
     public void agregarPedidoPendiente(Pedido pedido) {
         spp.agregarPedidoPendiente(pedido);
     }
-    public Articulo buscarArticuloPorNombre(String nombre) { //////////////////////////
-        for (Articulo art : getArticulosDisponibles()) {
-            if (art.getNombre().equals(nombre)) {
-                return art;
-            }
-        }
-        return null;
+//    public Articulo buscarArticuloPorNombre(String nombre) { //////////////////////////
+//        for (Articulo art : getArticulosDisponibles()) {
+//            if (art.getNombre().equals(nombre)) {
+//                return art;
+//            }
+//        }
+//        return null;
+//    }
+
+    public boolean agregarNuevoItemPedido(Mesa mesa, Item item) {
+        return sa.agregarNuevoItemPedido(mesa,item);
     }
 
-    public boolean agregarItemServicio(Mesa mesa, Item item) {
-        return sa.agregarNuevoItemPedido(mesa,item);
+    public void asignarGestorUP(UnidadProcesadora up, Gestor gestor) {
+        spp.asignarUPaGestor(gestor, up);
+    }
+
+    public void procesarPedidoPendiente(Pedido pedido, Gestor gestor) {
+        spp.procesarPedidoPendiente(pedido,gestor);
+        sa.avisarPedidoProcesado(pedido.getMesa());
     }
 
 }

@@ -114,4 +114,8 @@ public class SistemaAtencionCliente {
            
     }
 
+    void avisarPedidoProcesado(Mesa mesa) {
+        mesa.getMozo().avisar(Mozo.eventos.pedidoProcesado);
+    }
+
 }

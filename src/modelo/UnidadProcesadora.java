@@ -16,11 +16,13 @@ public class UnidadProcesadora extends Observable {
 
     private String nombre;
     private ArrayList<Pedido> pendientes;
+    private Gestor gestor;
 
 
     public UnidadProcesadora(String nombre) {
         this.nombre = nombre;
         this.pendientes = new ArrayList<>();
+        gestor = null;
 
     }
 
@@ -40,18 +42,28 @@ public class UnidadProcesadora extends Observable {
         this.pendientes = pendientes;
     }
 
+    public Gestor getGestor() {
+        return gestor;
+    }
+
+    public void setGestor(Gestor gestor) {
+        this.gestor = gestor;
+    }
+    
+    
+    
     public void avisar(eventos eventos) { //esto deberia ser privado o protectes, entonces el item y el pedido se cren en el mozo?
         setChanged();
         notifyObservers(eventos);
     }
 
-    void removerPendiente(Pedido p) {;
+    void removerPendiente(Pedido p) {
         pendientes.remove(p);
         avisar(eventos.pedidoTomado);
     }
 
     public enum eventos {
-        nuevoPedido, pedidoFinalizado, pedidoTomado;
+        nuevoPedido, pedidoFinalizado, pedidoTomado, procesandoPedido;
     }
 
     @Override

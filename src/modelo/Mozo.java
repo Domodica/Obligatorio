@@ -67,7 +67,8 @@ public class Mozo extends Usuario {
     public enum eventos {
         agregarArticulo, 
         transferencia, 
-        transferenciaIniciada;
+        transferenciaIniciada,
+        pedidoProcesado
     }
 
     public boolean tieneMesasAbiertas() {

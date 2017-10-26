@@ -51,16 +51,23 @@ public class SistemaProcesadorPedidos {
     }
 
     public void asignarUPaGestor(Gestor g, UnidadProcesadora up) {
-        g.setUp(up);
+        g.entrarEnServicio(up);
+        up.setGestor(g);
     }
 
     public void agregarPedidoPendiente(Pedido pedido) {
+        pedido.getItem().setPedido(pedido);//feo feo esto parece
         for (UnidadProcesadora up : unidadesProcesadoras) {
             if (pedido.getItem().getArt().getUp().equals(up)) {
                 up.getPendientes().add(pedido);
                 up.avisar(UnidadProcesadora.eventos.nuevoPedido);
             }
         }
+    }
+
+    void procesarPedidoPendiente(Pedido pedido, Gestor gestor) {
+        gestor.agregarPedidoTomado(pedido);
+        gestor.getUp().avisar(UnidadProcesadora.eventos.procesandoPedido);
     }
 
 }

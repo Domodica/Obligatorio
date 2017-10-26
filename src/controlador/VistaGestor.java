@@ -16,6 +16,8 @@ public interface VistaGestor {
     public void ingresarPuesto();
 
     public void mostrarPedidosPendientes();
+    
+    public void mostrarPedidosEnProceso();
 
     public void tomarPedido();
 

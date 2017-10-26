@@ -39,7 +39,6 @@ public class InfoMesaPanel extends JPanel {
         modelo.addColumn("Precio");
         modelo.addColumn("Subtotal");
         modelo.addColumn("Estado");
-        modelo.addColumn("Gestor");
         this.tableItemsConsumidos.setModel(modelo);
     }
 
@@ -140,7 +139,7 @@ public class InfoMesaPanel extends JPanel {
 
     public void mostrarServicios(Mesa seleccionada) {
         limpiarTabla();
-        String[] datos = new String[6];
+        String[] datos = new String[5];
         double total = 0;
 
         ArrayList<Item> listaItems = seleccionada.getServicio().getItems();
@@ -149,12 +148,8 @@ public class InfoMesaPanel extends JPanel {
                 datos[1] = i.getCantidad() + "";
                 datos[2] = i.getArt().getPrecio() + "";
                 datos[3] = (i.getCantidad()) * (i.getArt().getPrecio()) + "";
-                datos[4] = i.getPedido().getEstado().toString();
-                i.
-                datos[5] = " -- FALTA IMPLEMENTAR --";  //modelo.addColumn("Gestor");  
-                ////////////////////////Para poder hacer estos vamos a tener que hacer esto desde la Up cuando el pedido este agregado ahi
+                datos[4] = i.getPedido().getEstadoItem();
                 modelo.addRow(datos);
-
                 total += (double) (i.getCantidad()) * (i.getArt().getPrecio());
             }
 

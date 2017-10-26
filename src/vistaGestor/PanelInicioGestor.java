@@ -27,6 +27,7 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
         controlador.setVista(this);
         controlador.getGestor().getUp().addObserver(controlador);
         mostrarPedidosPendientes();
+        mostrarPedidosEnProceso();
     }
 
     /**
@@ -42,13 +43,17 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
         listPedidosPendientes = new javax.swing.JList();
         btnTomarPedido = new javax.swing.JButton();
         btnFinalizarPedido = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaPedidosProcesados = new javax.swing.JList();
 
         setLayout(null);
 
         jScrollPane1.setViewportView(listPedidosPendientes);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(80, 50, 550, 140);
+        jScrollPane1.setBounds(10, 20, 550, 110);
 
         btnTomarPedido.setText("TOMAR PEDIDO");
         btnTomarPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -57,26 +62,48 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
             }
         });
         add(btnTomarPedido);
-        btnTomarPedido.setBounds(160, 230, 150, 50);
+        btnTomarPedido.setBounds(590, 50, 150, 50);
 
         btnFinalizarPedido.setText("FINALIZAR PEDIDO");
+        btnFinalizarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarPedidoActionPerformed(evt);
+            }
+        });
         add(btnFinalizarPedido);
-        btnFinalizarPedido.setBounds(380, 230, 150, 50);
+        btnFinalizarPedido.setBounds(590, 210, 150, 50);
+
+        btnLogout.setText("LOGOUT");
+        add(btnLogout);
+        btnLogout.setBounds(650, 300, 100, 30);
+        add(jSeparator1);
+        jSeparator1.setBounds(20, 142, 720, 10);
+
+        jScrollPane2.setViewportView(listaPedidosProcesados);
+
+        add(jScrollPane2);
+        jScrollPane2.setBounds(10, 180, 540, 120);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTomarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTomarPedidoActionPerformed
         tomarPedido();
     }//GEN-LAST:event_btnTomarPedidoActionPerformed
 
+    private void btnFinalizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarPedidoActionPerformed
+        finalizarPedidoProcesado();
+    }//GEN-LAST:event_btnFinalizarPedidoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinalizarPedido;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnTomarPedido;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JList listPedidosPendientes;
+    private javax.swing.JList listaPedidosProcesados;
     // End of variables declaration//GEN-END:variables
-
-    
 
     @Override
     public void mostrarPedidosPendientes() {
@@ -90,14 +117,22 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
         if (controlador.getGestor().quedanPendientes()) {
             Pedido pedido = (Pedido) listPedidosPendientes.getSelectedValue();
             controlador.tomarPedido(pedido);
-        }else{
-            error("No quedan pedidos pendientes que seleccionar");               
+            mostrarPedidosEnProceso();
+        } else {
+            error("No quedan pedidos pendientes que seleccionar");
         }
     }
 
     @Override
+    public void mostrarPedidosEnProceso() {
+        listaPedidosProcesados.removeAll();
+        listaPedidosProcesados.setListData(controlador.getGestor().getTomados().toArray());
+        listaPedidosProcesados.repaint();
+    }
+
+    @Override
     public void finalizarPedido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        controlador.finalizarPedidoProcesado(listPedidosPendientes.getSelectedIndex());
     }
 
     @Override
@@ -109,8 +144,18 @@ public class PanelInicioGestor extends javax.swing.JPanel implements VistaGestor
     public void ingresarPuesto() {
 
     }
+
     @Override
     public void mostrarUnidadesProcesadoras() {
 
     }
+
+    public void finalizarPedidoProcesado() {
+        if(controlador.getGestor().quedanProcesados()){
+            Pedido p = (Pedido) listPedidosPendientes.getSelectedValue();
+            controlador.finalizarPedidoProcesado(p);
+        }
+        
+    }
+
 }

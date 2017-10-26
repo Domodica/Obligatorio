@@ -50,21 +50,28 @@ public class ControladorGestor implements Observer{
     @Override
     public void update(Observable origen, Object evento) {
         if(evento.equals(UnidadProcesadora.eventos.nuevoPedido) || evento.equals(UnidadProcesadora.eventos.pedidoTomado)){
-            cargarPedidosPendientes();
+            vista.mostrarPedidosPendientes();
+        }
+        else if(evento.equals(UnidadProcesadora.eventos.procesandoPedido)){
+            vista.mostrarPedidosEnProceso();
         }
     }
 
-    private void cargarPedidosPendientes() {
-        vista.mostrarPedidosPendientes();
-    }
-    
     public void entrarUP(UnidadProcesadora up){
-        gestor.entrarEnServicio(up);
+        fachada.asignarGestorUP(up, gestor);
     }
 
     
     public void tomarPedido(Pedido pedido) {
-        gestor.agregarPedidoTomado(pedido);
+        fachada.procesarPedidoPendiente(pedido, gestor);
+    }
+
+    private void cargarPedidosProcesados() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void finalizarPedidoProcesado(Pedido p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

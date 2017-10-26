@@ -50,13 +50,14 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public void cambiarEstadoATomado() {
-        if (this.estado.equals(estado.PENDIENTE)) {
+    public void cambiarEstadoPendienteATomado(UnidadProcesadora up) {
+        if (this.estado.equals(Estado.PENDIENTE)) {
             this.estado = Estado.PROCESANDO;
+            this.procesadora = up;
         }
     }
-        public void cambiarEstadoAFinalizado() {
-        if (this.estado.equals(estado.PROCESANDO)) {
+        public void cambiarEstadoTomadoAFinalizado() {
+        if (this.estado.equals(Estado.PROCESANDO)) {
             this.estado = Estado.TERMINADO;
         }
     }
@@ -64,5 +65,12 @@ public class Pedido {
     @Override
     public String toString() {
         return item.getArt().getNombre() + " cantidad: " + item.getCantidad() + " " + item.getDescripcion() + " Mesa:  " + mesa.getNumero() + " " + mesa.getMozo().getNombreCompleto();
+    }
+
+    public String getEstadoItem() {
+        if(this.getEstado().equals(Estado.PENDIENTE))
+            return getEstado().toString();
+        else
+            return getEstado().toString() + " -- " + procesadora.getGestor().getNombreCompleto();
     }
 }

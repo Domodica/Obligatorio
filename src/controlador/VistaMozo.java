@@ -34,5 +34,9 @@ public interface VistaMozo {
     public void error(String mensaje);
     
     public void mostarListaArticulos();
+    
+    public void actualizarServicios();
+    
+    public void limpiarTablas();
 
 }

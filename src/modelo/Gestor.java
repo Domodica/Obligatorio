@@ -54,7 +54,7 @@ public class Gestor extends Usuario {
     
     public void agregarPedidoTomado (Pedido p){
         tomados.add(p);
-        p.cambiarEstadoATomado();
+        p.cambiarEstadoPendienteATomado(up);
         up.removerPendiente(p);
     }
     
@@ -64,8 +64,13 @@ public class Gestor extends Usuario {
         return (up.getPendientes().size()>0);
     }
     
+    public boolean quedanProcesados(){
+        return (tomados.size()>0);
+    }
+    
     public void entrarEnServicio(UnidadProcesadora up) {
         this.setUp(up);
+        
     }
     
 

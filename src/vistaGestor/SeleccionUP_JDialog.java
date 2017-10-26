@@ -97,7 +97,7 @@ public class SeleccionUP_JDialog extends javax.swing.JDialog implements VistaGes
         UnidadProcesadora up = (UnidadProcesadora) listUnidadesP.getSelectedValue();
         this.controlador.entrarUP(up);
         JFrame f = new JFrame();
-        f.setSize(800, 400);
+        f.setSize(800, 300);
         PanelInicioGestor pi = new PanelInicioGestor(controlador);
         f.setTitle("Bienvenido " + controlador.getGestor().getNombreCompleto());
         f.setContentPane(pi);
@@ -123,5 +123,10 @@ public class SeleccionUP_JDialog extends javax.swing.JDialog implements VistaGes
     @Override
     public void error(String mensaje) {
          JOptionPane.showMessageDialog(this, mensaje, "Error en aplicacion gestor", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void mostrarPedidosEnProceso() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
